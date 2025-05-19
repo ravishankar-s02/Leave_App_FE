@@ -1,0 +1,19 @@
+<div class="container mt-4">
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+      <div class="mb-3">
+        <label>Name</label>
+        <input class="form-control" [(ngModel)]="emp.name" name="name" required />
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input class="form-control" [(ngModel)]="emp.email" name="email" required />
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="emp.password" name="password" required />
+      </div>
+      <button class="btn btn-success" type="submit">Register</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h2>Apply for Leave</h2>
+    <form (ngSubmit)="apply()">
+      <div class="mb-3">
+        <label>Leave Type ID</label>
+        <input class="form-control" [(ngModel)]="leave.leaveTypeId" name="leaveTypeId" required />
+      </div>
+      <div class="mb-3">
+        <label>Start Date</label>
+        <input type="date" class="form-control" [(ngModel)]="leave.startDate" name="startDate" required />
+      </div>
+      <div class="mb-3">
+        <label>End Date</label>
+        <input type="date" class="form-control" [(ngModel)]="leave.endDate" name="endDate" required />
+      </div>
+      <div class="mb-3">
+        <label>Reason</label>
+        <textarea class="form-control" [(ngModel)]="leave.reason" name="reason" required></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+  
