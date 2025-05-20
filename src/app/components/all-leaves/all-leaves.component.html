@@ -4,22 +4,30 @@
       <thead>
         <tr>
           <th>Leave ID</th>
+          <th>Leave Type Id</th>
+          <th>Name</th>
           <th>Type</th>
           <th>Start</th>
           <th>End</th>
           <th>Reason</th>
           <th>Status</th>
+          <th>Applied On</th>
+          <th>Employee ID</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let l of leaves">
+            <td>{{ l['leaveId'] }}</td>
             <td>{{ l['leaveTypeId'] }}</td>
+            <td>{{ l['name'] }}</td>
             <td>{{ l['typeName'] }}</td>
             <td>{{ l['startDate'] }}</td>
             <td>{{ l['endDate'] }}</td>
             <td>{{ l['reason'] }}</td>
             <td>{{ l['status'] }}</td>
+            <td>{{ l['appliedOn'] }}</td>
+            <td>{{ l['employeeId'] }}</td>
             <td>
               <button class="btn btn-success btn-sm" (click)="updateStatus(l['leaveId'], 'Approved')">Approve</button>
               <button class="btn btn-danger btn-sm" (click)="updateStatus(l['leaveId'], 'Rejected')">Reject</button>

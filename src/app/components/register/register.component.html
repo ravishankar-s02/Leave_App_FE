@@ -1,19 +1,41 @@
 <div class="container mt-4">
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-      <div class="mb-3">
-        <label>Name</label>
-        <input class="form-control" [(ngModel)]="emp.name" name="name" required />
+  <form #form="ngForm" (ngSubmit)="register()" novalidate>
+    <div class="container">
+      <div class="row my-5">
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <div class="fs-1 fw-bold">
+            LOGO
+          </div>
+        </div>
+        <div class="col-md-6 my-5">
+          <div class="border rounded p-5">
+            <div class="text-center">
+              <h3 class="fw-bold">Create Account</h3>
+              <p class="text-secondary">Fill the form to sign up</p>
+            </div>
+            <div>
+              <div class="form-floating mb-3">                
+                <input class="form-control" [(ngModel)]="emp.name" placeholder="Name" name="name" required />
+                <label>Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control" [(ngModel)]="emp.email" id="floatingInputEmail" placeholder="Email" name="email" required />
+                <label for="floatingInputEmail">Email</label>
+              </div>
+              <div class="form-floating mb-3">                
+                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="emp.password" name="password" required />
+                <label>Password</label>
+              </div>
+              <div class="d-grid gap-2 mb-3">
+                <button class="btn btn-success" type="submit" [disabled]="!form.valid">Register</button>
+              </div>
+              <!-- <div class="alert alert-secondary text-center mb-0" role="alert">
+                Already have an account? <a routerLink="/auth/login" class="alert-link">Login Here</a>
+              </div> -->
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label>Email</label>
-        <input class="form-control" [(ngModel)]="emp.email" name="email" required />
-      </div>
-      <div class="mb-3">
-        <label>Password</label>
-        <input type="password" class="form-control" [(ngModel)]="emp.password" name="password" required />
-      </div>
-      <button class="btn btn-success" type="submit">Register</button>
-    </form>
-  </div>
-  
+    </div>    
+  </form>
+</div>

@@ -1,16 +1,32 @@
 <div class="container mt-4">
-    <h2>Login</h2>
-    <form (ngSubmit)="login()">
-      <div class="mb-3">
-        <label>Email</label>
-        <input class="form-control" [(ngModel)]="loginData.email" name="email" required />
+  <form (ngSubmit)="login()">
+    <div class="container">
+      <div class="row my-5">
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <div class="fs-1 fw-bold">LOGO</div>
+        </div>
+        <div class="col-md-6 my-5">
+          <div class="border rounded p-5">
+            <div class="text-center">
+              <h3 class="fw-bold">Welcome!</h3>
+              <p class="text-secondary">Login to Continue</p>
+            </div>
+            <div>
+              <div class="form-floating mb-3">                
+                <input class="form-control" [(ngModel)]="loginData.email" placeholder="Email" name="email" required />
+                <label>Email</label>
+              </div>
+              <div class="form-floating mb-3">                
+                <input type="password" class="form-control" [(ngModel)]="loginData.password" placeholder="Password" name="password" required />
+                <label>Password</label>
+              </div>
+              <div class="d-grid gap-2 mb-3">
+                <button class="btn btn-primary" type="submit">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label>Password</label>
-        <input type="password" class="form-control" [(ngModel)]="loginData.password" name="password" required />
-      </div>
-      <button class="btn btn-primary" type="submit">Login</button>
-    </form>
-    <a routerLink="/register" class="btn btn-link mt-2">Register</a>
-  </div>
-  
+    </div>
+  </form>
+</div>
