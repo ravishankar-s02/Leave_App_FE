@@ -15,6 +15,7 @@ import { JobComponent } from './components/job/job.component';
 import { SalaryComponent } from './components/salary/salary.component';
 import { WorkExperienceComponent } from './components/work-experience/work-experience.component';
 import { EducationComponent } from './components/education/education.component';
+import { ViewUserComponent } from './components/view-user/view-user.component'; // ✅ Import view-user component
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'my-leaves', component: MyLeavesComponent },
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'all-leaves', component: AllLeavesComponent },
-  { path: '', redirectTo:'login', pathMatch:'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -35,8 +37,11 @@ const routes: Routes = [
       { path: 'work-experience', component: WorkExperienceComponent },
       { path: 'education', component: EducationComponent },
       { path: 'apply-leaves', component: ApplyLeaveComponent },
+      { path: 'my-leaves', component: MyLeavesComponent },
       { path: 'all-leaves', component: AllLeavesComponent },
-      { path: 'my-leaves', component: MyLeavesComponent }
+
+      // ✅ Add the new admin-only route
+      { path: 'view-user', component: ViewUserComponent }
     ]
   }
 ];

@@ -36,4 +36,12 @@ export class LeaveService {
   updateStatus(leaveId: number, status: string): Observable<any> {
     return this.http.put(`${this.api}/Leave/status?leaveId=${leaveId}&status=${status}`, {});
   }
+
+  getPersonalDetails(employeeId: number): Observable<any> {
+    return this.http.get<any>(`${this.api}/personal-details/${employeeId}`);
+  }
+
+  savePersonalDetails(details: any): Observable<any> {
+    return this.http.post(`${this.api}/personal-details/save`, details);
+  }
 }

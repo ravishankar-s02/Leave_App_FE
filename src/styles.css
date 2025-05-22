@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.primarybtn{
+    background-color:#f99700 !important;
+    border-color: #f99700 !important;
+}
+
+body{
+    font-size: .75rem;
+    font-family: "Open Sans", Arial, sans-serif;
+}

@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row my-5">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <div class="fs-1 fw-bold">LOGO</div>
+          <div class="fs-1 fw-bold">
+            <img src="assets/ss.png" alt="Company Logo" class="logo" />
+          </div>
         </div>
         <div class="col-md-6 my-5">
           <div class="border rounded p-5">
@@ -13,15 +15,15 @@
             </div>
             <div>
               <div class="form-floating mb-3">                
-                <input class="form-control" [(ngModel)]="loginData.email" placeholder="Email" name="email" required />
-                <label>Email</label>
+                <input class="form-control" [(ngModel)]="loginData.name" placeholder="Name" name="name" required />
+                <label>Name</label>
               </div>
               <div class="form-floating mb-3">                
                 <input type="password" class="form-control" [(ngModel)]="loginData.password" placeholder="Password" name="password" required />
                 <label>Password</label>
               </div>
               <div class="d-grid gap-2 mb-3">
-                <button class="btn btn-primary" type="submit">Login</button>
+                <button class="btn btn-primary primarybtn"  type="submit">Login</button>
               </div>
             </div>
           </div>

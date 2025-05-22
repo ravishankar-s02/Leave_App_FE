@@ -25,9 +25,17 @@
         <span>Leave</span>
         <ul>
           <li><a routerLink="/dashboard/apply-leaves">Apply Leave</a></li>
-          <li><a routerLink="/dashboard/all-leaves">My Leave</a></li>
+          <li><a routerLink="/dashboard/my-leaves">My Leave</a></li>
+          <li *ngIf="role === 'Admin'">
+            <a routerLink="/dashboard/all-leaves">All Leaves</a>
+          </li>
         </ul>
-      </li>
+        <li *ngIf="role === 'Admin'">
+          <span>User-Details</span>
+          <ul>
+            <li><a routerLink="/dashboard/view-user">View User</a></li>
+          </ul>
+        </li>        
     </ul>
   </nav>
   

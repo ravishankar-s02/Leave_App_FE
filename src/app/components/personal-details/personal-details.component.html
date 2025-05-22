@@ -1,1 +1,69 @@
-<p>personal-details works!</p>
+<div class="container mt-4">
+    <form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="border rounded p-4">
+            <div class="text-center mb-4">
+              <h3 class="fw-bold">Personal Details</h3>
+            </div>
+  
+            <div class="form-floating mb-3">
+              <input type="text" id="firstName" class="form-control"
+                formControlName="firstName" [readonly]="!isAdmin" placeholder="First Name" />
+              <label for="firstName">First Name</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+              <input type="text" id="lastName" class="form-control"
+                formControlName="lastName" [readonly]="!isAdmin" placeholder="Last Name" />
+              <label for="lastName">Last Name</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input type="date" id="dob" class="form-control"
+                  formControlName="dob" [readonly]="!isAdmin" placeholder="DOB" />
+                <label for="dob">Date of Birth</label>
+              </div>              
+  
+              <div class="form-floating mb-3">
+                <select class="form-select" formControlName="gender" [disabled]="!isAdmin">
+                  <option value="" disabled>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                <label>Gender</label>
+              </div>
+  
+            <div class="form-floating mb-3">
+              <input type="text" id="email" class="form-control"
+                formControlName="email" [readonly]="!isAdmin" placeholder="Email" />
+              <label for="email">Email</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <select class="form-select" formControlName="maritalStatus" [disabled]="!isAdmin">
+                  <option value="" disabled>Select Marital Status</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                  <option value="Divorced">Divorced</option>
+                </select>
+                <label>Marital Status</label>
+              </div>
+  
+            <div class="form-floating mb-3">
+              <input type="text" id="nationality" class="form-control"
+                formControlName="nationality" [readonly]="!isAdmin" placeholder="Nationality" />
+              <label for="nationality">Nationality</label>
+            </div>
+  
+            <div class="d-grid gap-2" *ngIf="isAdmin">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  

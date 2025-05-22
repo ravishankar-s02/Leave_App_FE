@@ -9,7 +9,7 @@ import { LeaveService } from '../../services/leave.service';
   standalone: false
 })
 export class RegisterComponent {
-  emp: Employee = { name: '', email: '', password: '' };
+  emp: Employee = { name: '', email: '', password: '', role: '' };
 
   constructor(private service: LeaveService, private router: Router) {}
 

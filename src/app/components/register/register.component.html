@@ -4,7 +4,7 @@
       <div class="row my-5">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <div class="fs-1 fw-bold">
-            LOGO
+            <img src="assets/ss.png" alt="Company Logo" class="logo" />
           </div>
         </div>
         <div class="col-md-6 my-5">
@@ -26,6 +26,15 @@
                 <input type="password" class="form-control" placeholder="Password" [(ngModel)]="emp.password" name="password" required />
                 <label>Password</label>
               </div>
+              
+              <div class="form-floating mb-3">
+                <select class="form-select" [(ngModel)]="emp.role" name="role" required>
+                  <option value="User">User</option>
+                  <option value="Admin">Admin</option>
+                </select>
+                <label>Role</label>
+              </div>
+
               <div class="d-grid gap-2 mb-3">
                 <button class="btn btn-success" type="submit" [disabled]="!form.valid">Register</button>
               </div>

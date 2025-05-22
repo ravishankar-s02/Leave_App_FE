@@ -20,6 +20,8 @@ import { JobComponent } from './components/job/job.component';
 import { SalaryComponent } from './components/salary/salary.component';
 import { WorkExperienceComponent } from './components/work-experience/work-experience.component';
 import { EducationComponent } from './components/education/education.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ViewUserComponent } from './components/view-user/view-user.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +40,15 @@ import { EducationComponent } from './components/education/education.component';
     JobComponent,
     SalaryComponent,
     WorkExperienceComponent,
-    EducationComponent
+    EducationComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

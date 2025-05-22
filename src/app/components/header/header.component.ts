@@ -12,6 +12,11 @@ export class HeaderComponent {
 
   constructor(private router: Router) {}
 
+  ngOnInit() {
+    const storedUsername = localStorage.getItem('name');
+    this.username = storedUsername ? storedUsername : 'User';
+  }  
+
   logout() {
     localStorage.removeItem('employeeId');
     this.router.navigate(['/login']);

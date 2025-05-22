@@ -26,7 +26,7 @@ export class ApplyLeaveComponent {
     this.service.applyLeave(this.leave).subscribe({
       next: (res: any) => {
         alert(res.message || 'Leave applied successfully!');
-        this.router.navigate(['/my-leaves']);
+        // this.router.navigate(['/my-leaves']);
       },
       error: (err) => {
         alert(err.error?.message || 'Failed to apply leave.');
