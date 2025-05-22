@@ -1,17 +1,42 @@
 .dashboard-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .main {
-    flex: 1;
-    display: flex;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+app-header {
+  height: 60px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white; /* Or whatever your header background is */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+app-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  height: calc(100vh - 60px); /* Full height minus header */
+  position: sticky;
+  top: 60px;
+  background-color: #f4f4f4; /* Optional */
+  overflow-y: auto;
+}
+
+.content {
+  flex: 1;
+  padding: 0; /* Remove internal padding */
+  overflow-y: auto;
+  height: calc(100vh - 60px); /* Allow scroll */
+  display: flex;
+  justify-content: flex-start; /* Align horizontally to left */
+  align-items: flex-start;     /* Align vertically to top */
+}
+

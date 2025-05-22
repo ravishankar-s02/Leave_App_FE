@@ -1,0 +1,38 @@
+/* .btn-warning {
+    background-color: #f5a623;
+    border-color: #f5a623;
+  }
+  .btn-warning:hover {
+    background-color: #e6951f;
+    border-color: #e6951f;
+  }
+   */
+  .hcolor{
+    color: #3b6caa !important;
+    font-size: .815rem !important;
+  }
+
+  .tcolor{
+    color: #3b6caa !important;
+    font-size: .6875rem;
+  }
+
+  input, select{
+    font-size: .75rem !important;
+  }
+
+  .label-fixed-width {
+    width: 130px; /* adjust as needed */
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 0.75rem;
+  }
+  
+  .form-control, .form-select {
+    font-size: 0.75rem;
+  }
+  
+  .bcolor{
+    border-color: #bbb !important;
+    border-radius: 0 !important;
+  }

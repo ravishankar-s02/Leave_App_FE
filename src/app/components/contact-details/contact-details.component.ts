@@ -1,11 +1,32 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+ 
 @Component({
-  selector: 'app-contact-details',
-  standalone: false,
+  selector: 'app-personal-details',
   templateUrl: './contact-details.component.html',
-  styleUrl: './contact-details.component.css'
+  standalone:false
 })
-export class ContactDetailsComponent {
-
+export class ContactDetailsComponent implements OnInit {
+  contactForm!: FormGroup;
+isAdmin: any;
+ 
+  constructor(private fb: FormBuilder) {}
+ 
+  ngOnInit(): void {
+    this.contactForm = this.fb.group({ 
+      // Contact Details
+      phoneNumber: [''],
+      altNumber: [''],
+      email: [''],
+      streetAddress: [''],
+      city: [''],
+      state: [''],
+      zipCode: [''],
+      country: ['']
+    });
+  }
+ 
+  onSubmit() {
+    console.log(this.contactForm.value);
+  }
 }

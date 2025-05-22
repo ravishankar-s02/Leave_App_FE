@@ -1,0 +1,23 @@
+  .hcolor{
+    color: #3b6caa !important;
+    font-size: .815rem !important;
+  }
+
+  .tcolor{
+    color: #3b6caa !important;
+    font-size: .6875rem;
+  }
+
+  input, select{
+    font-size: .75rem !important;
+  }
+
+  .label-fixed-width {
+    width: 130px; /* adjust as needed */
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 0.75rem;
+  }
+
+  
+  

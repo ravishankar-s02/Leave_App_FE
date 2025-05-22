@@ -1,1 +1,75 @@
-<p>contact-details works!</p>
+<div class="container mt-4">
+    <form [formGroup]="contactForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm border bcolor">
+                    <div class="card-header bg-light border-bottom-0">
+                        <h5 class="mb-0 text-primary fw-semibold hcolor">
+                            Contact Details
+                        </h5>
+                    </div>
+
+                    <div class="card-body pt-3 tcolor">
+                        <div class="form-group row ps-0 pe-0 ms-0 me-0">
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="phoneNumber" class="form-label me-3 label-fixed-width">Phone Number</label>
+                                <input type="tel" id="phoneNumber" class="form-control flex-grow-1"
+                                    formControlName="phoneNumber" [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="altNumber" class="form-label me-3 label-fixed-width">Alternate
+                                    Number</label>
+                                <input type="tel" id="altNumber" class="form-control flex-grow-1"
+                                    formControlName="altNumber" [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="email" class="form-label me-3 label-fixed-width">Email</label>
+                                <input type="text" id="email" class="form-control flex-grow-1" formControlName="email"
+                                    [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="streetAddress" class="form-label me-3 label-fixed-width">Street
+                                    Address</label>
+                                <input type="text" id="streetAddress" class="form-control flex-grow-1"
+                                    formControlName="streetAddress" [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="city" class="form-label me-3 label-fixed-width">City</label>
+                                <input type="text" id="city" class="form-control flex-grow-1" formControlName="city"
+                                    [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="state" class="form-label me-3 label-fixed-width">State</label>
+                                <input type="text" id="state" class="form-control flex-grow-1" formControlName="state"
+                                    [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="zipCode" class="form-label me-3 label-fixed-width">Zip/Postal Code</label>
+                                <input type="text" id="zipCode" class="form-control flex-grow-1"
+                                    formControlName="zipCode" [readonly]="!isAdmin" />
+                            </div>
+
+                            <div class="form-group d-flex align-items-center mb-2">
+                                <label for="country" class="form-label me-3 label-fixed-width">Country</label>
+                                <input type="text" id="country" class="form-control flex-grow-1"
+                                    formControlName="country" [readonly]="!isAdmin" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-2">
+                            <button type="submit" class="btn btn-primary primarybtn">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -13,7 +13,7 @@
           <th>Status</th>
           <th>Applied On</th>
           <th>Employee ID</th>
-          <th>Actions</th>
+          <th>Approve/Reject</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +28,10 @@
             <td>{{ l['status'] }}</td>
             <td>{{ l['appliedOn'] }}</td>
             <td>{{ l['employeeId'] }}</td>
-            <td>
-              <button class="btn btn-success btn-sm" (click)="updateStatus(l['leaveId'], 'Approved')">Approve</button>
-              <button class="btn btn-danger btn-sm" (click)="updateStatus(l['leaveId'], 'Rejected')">Reject</button>
+            <td class="action">
+              <button class="btn btn-success btn-sm me-2" (click)="updateStatus(l['leaveId'], 'Approved')"><i class="bi bi-check-circle"></i></button>
+              <button class="btn btn-danger btn-sm" (click)="updateStatus(l['leaveId'], 'Rejected')"><i class="bi bi-x-circle"></i></button>           
+            
             </td>            
         </tr>
       </tbody>

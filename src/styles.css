@@ -2,9 +2,44 @@
 .primarybtn{
     background-color:#f99700 !important;
     border-color: #f99700 !important;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: .75rem;
+    border-radius: 4px !important;
+
 }
 
 body{
     font-size: .75rem;
     font-family: "Open Sans", Arial, sans-serif;
 }
+
+.hcolor{
+    color: #3b6caa !important;
+    font-size: .815rem !important;
+  }
+
+  .tcolor{
+    color: #3b6caa !important;
+    font-size: .6875rem;
+  }
+
+  input, select{
+    font-size: .75rem !important;
+  }
+
+  .label-fixed-width {
+    width: 130px; /* adjust as needed */
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 0.75rem;
+  }
+  
+  .form-control, .form-select {
+    font-size: 0.75rem;
+  }
+  
+  .bcolor{
+    border-color: #bbb !important;
+    border-radius: 0 !important;
+  }
