@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class HeaderComponent {
-  username = localStorage.getItem('username') || 'User';
+  username: any;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    const storedUsername = localStorage.getItem('name');
-    this.username = storedUsername ? storedUsername : 'User';
+    // const storedUsername = localStorage.getItem('name');
+    this.username = localStorage?.getItem('name') ? localStorage.getItem('name') : 'User';
   }  
 
   logout() {

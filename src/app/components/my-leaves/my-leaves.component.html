@@ -1,28 +1,11 @@
-<div class="container mt-4">
-    <h2>My Leave Applications</h2>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Leave No</th>
-          <th>Leave ID</th>
-          <th>Type</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Reason</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let l of leaves; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ l['leaveTypeId'] }}</td>
-          <td>{{ l['typeName'] }}</td>
-          <td>{{ l['startDate'] }}</td>
-          <td>{{ l['endDate'] }}</td>
-          <td>{{ l['reason'] }}</td>
-          <td>{{ l['status'] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+<div class="container-fluid mt-4 px-0">
+  <h2>My Leave Applications (AG Grid View)</h2>
+  <ag-grid-angular
+    class="ag-theme-alpine compact-grid"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [pagination]="true"
+    [paginationPageSize]="10"
+    [domLayout]="'autoHeight'">
+  </ag-grid-angular>
+</div>

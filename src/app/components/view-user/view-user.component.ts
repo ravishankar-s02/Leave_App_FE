@@ -14,7 +14,7 @@ export class ViewUserComponent {
 
   onView(): void {
     if (this.employeeId.trim()) {
-      localStorage.setItem('adminViewEmployeeId', this.employeeId);
+      localStorage.setItem('adminViewEmployeeId', this.employeeId.toString());
       this.router.navigate(['/dashboard/personal-details']);
     } else {
       alert('Please enter a valid Employee ID');

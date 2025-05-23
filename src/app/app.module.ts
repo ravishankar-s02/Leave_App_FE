@@ -23,6 +23,14 @@ import { EducationComponent } from './components/education/education.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 
+// AG Grid imports
+import { AgGridModule } from 'ag-grid-angular';
+import { ModuleRegistry } from 'ag-grid-community';
+import { ClientSideRowModelModule } from 'ag-grid-community';
+
+// Register the required module(s)
+ModuleRegistry.registerModules([ClientSideRowModelModule]);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +56,8 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
