@@ -10,21 +10,25 @@
           <div class="card-body pt-3 tcolor">
             <div class="form-group row ps-0 pe-0 ms-0 me-0">
 
+              <!-- Name -->
               <div class="form-group d-flex align-items-center mb-2">
-                <label for="firstName" class="form-label me-3 label-fixed-width">First Name</label>
-                <input type="text" id="firstName" class="form-control flex-grow-1" formControlName="firstName" [readonly]="!isAdmin" />
-              </div>              
-
-              <div class="form-group d-flex align-items-center mb-2">
-                <label for="lastName" class="form-label me-3 label-fixed-width">Last Name</label>
-                <input type="text" id="lastName" class="form-control flex-grow-1" formControlName="lastName" [readonly]="!isAdmin" />
+                <label for="name" class="form-label me-3 label-fixed-width">Name</label>
+                <input type="text" id="name" class="form-control flex-grow-1" formControlName="name" [readonly]="!isAdmin" />
+              </div>
+              <div class="text-danger ms-5 mb-2" *ngIf="personalForm.get('name')?.touched && personalForm.get('name')?.invalid">
+                Name is required.
               </div>
 
+              <!-- DOB -->
               <div class="form-group d-flex align-items-center mb-2">
                 <label for="dob" class="form-label me-3 label-fixed-width">Date of Birth</label>
                 <input type="date" id="dob" class="form-control flex-grow-1" formControlName="dob" [readonly]="!isAdmin" />
               </div>
+              <div class="text-danger ms-5 mb-2" *ngIf="personalForm.get('dob')?.touched && personalForm.get('dob')?.invalid">
+                Date of birth is required.
+              </div>
 
+              <!-- Gender -->
               <div class="form-group d-flex align-items-center mb-2">
                 <label class="form-label me-3 label-fixed-width">Gender</label>
                 <select class="form-select" formControlName="gender" [disabled]="!isAdmin">
@@ -34,12 +38,21 @@
                   <option value="Other">Other</option>
                 </select>
               </div>
+              <div class="text-danger ms-5 mb-2" *ngIf="personalForm.get('gender')?.touched && personalForm.get('gender')?.invalid">
+                Gender is required.
+              </div>
 
+              <!-- Email -->
               <div class="form-group d-flex align-items-center mb-2">
                 <label for="email" class="form-label me-3 label-fixed-width">Email</label>
                 <input type="text" id="email" class="form-control flex-grow-1" formControlName="email" [readonly]="!isAdmin" />
               </div>
+              <div class="text-danger ms-5 mb-2" *ngIf="personalForm.get('email')?.touched && personalForm.get('email')?.invalid">
+                <span *ngIf="personalForm.get('email')?.errors?.['required']">Email is required.</span>
+                <span *ngIf="personalForm.get('email')?.errors?.['email']">Invalid email format.</span>
+              </div>
 
+              <!-- Marital Status -->
               <div class="form-group d-flex align-items-center mb-2">
                 <label class="form-label me-3 label-fixed-width">Marital Status</label>
                 <select class="form-select" formControlName="maritalStatus" [disabled]="!isAdmin">
@@ -49,11 +62,19 @@
                   <option value="Divorced">Divorced</option>
                 </select>
               </div>
+              <div class="text-danger ms-5 mb-2" *ngIf="personalForm.get('maritalStatus')?.touched && personalForm.get('maritalStatus')?.invalid">
+                Marital status is required.
+              </div>
 
+              <!-- Nationality -->
               <div class="form-group d-flex align-items-center mb-3">
                 <label for="nationality" class="form-label me-3 label-fixed-width">Nationality</label>
                 <input type="text" id="nationality" class="form-control flex-grow-1" formControlName="nationality" [readonly]="!isAdmin" />
               </div>
+              <div class="text-danger ms-5 mb-2" *ngIf="personalForm.get('nationality')?.touched && personalForm.get('nationality')?.invalid">
+                Nationality is required.
+              </div>
+
             </div>
 
             <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">

@@ -20,7 +20,7 @@ export class LoginComponent {
           localStorage.setItem('employeeId', res.employeeId.toString());
           localStorage.setItem('name', res.name); // assuming 'name' comes from backend
           localStorage.setItem('role', res.role); // 👈 save role
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard/personal-details']);
         } else {
           alert('Login successful, but employee ID is missing.');
         }

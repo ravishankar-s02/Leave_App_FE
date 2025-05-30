@@ -1,30 +1,146 @@
-/* Make the grid compact and remove scrollbars */
-.compact-grid {
-    width: 100% !important;
-    overflow-x: hidden !important;
-  }
-  
-  /* Remove padding inside header and body cells */
-  .ag-theme-alpine .ag-header-cell,
-  .ag-theme-alpine .ag-cell {
-    padding-left: 2px !important;
-    padding-right: 2px !important;
-    border-right: none !important;
-  }
-  
-  /* Optional: reduce row height */
-  .ag-theme-alpine .ag-row {
-    line-height: 1.5rem !important;
-    min-height: 32px !important;
-  }
-  
-  /* Optional: reduce header row height */
-  .ag-theme-alpine .ag-header-row {
-    min-height: 32px !important;
-  }
-  
-  /* Optional: make the font slightly smaller */
-  .ag-theme-alpine {
-    font-size: 0.85rem;
-  }
-  
+/* Grid Container Styling */
+.grid-wrapper {
+  width: 100%;
+  height: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Custom AG Grid Theme Override */
+.custom-grid {
+  --ag-header-height: 32px;
+  --ag-row-height: 28px;
+  --ag-header-background-color: #e9ecef;
+  --ag-header-foreground-color: #495057;
+  --ag-odd-row-background-color: #ffffff;
+  --ag-even-row-background-color: #f8f9fa;
+  --ag-row-border-color: #dee2e6;
+  --ag-border-color: #dee2e6;
+  font-size: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Styling */
+.custom-grid .ag-header {
+  background-color: #e9ecef !important;
+  border-bottom: 2px solid #dee2e6 !important;
+}
+
+.custom-grid .ag-header-cell {
+  background-color: #e9ecef !important;
+  border-right: 1px solid #dee2e6 !important;
+  padding: 4px 8px !important;
+}
+
+.custom-grid .ag-header-cell-text {
+  font-weight: 600 !important;
+  color: #495057 !important;
+  font-size: 11px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Row Styling */
+.custom-grid .ag-row {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.custom-grid .ag-row:hover {
+  background-color: #e3f2fd !important;
+}
+
+.custom-grid .ag-cell {
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  display: flex !important;
+  align-items: center !important;
+  border-right: 1px solid #dee2e6 !important;
+}
+
+/* Specific cell styling for data types */
+.custom-grid .ag-cell:first-child {
+  background-color: #f8f9fa !important;
+  font-weight: 600 !important;
+  justify-content: center !important;
+}
+
+/* Remove default AG Grid borders and padding */
+.custom-grid .ag-root-wrapper {
+  border: none !important;
+}
+
+.custom-grid .ag-paging-panel {
+  border-top: 1px solid #dee2e6 !important;
+  background-color: #f8f9fa !important;
+  padding: 8px 12px !important;
+  font-size: 11px !important;
+}
+
+/* Pagination styling */
+.custom-grid .ag-paging-button {
+  background-color: transparent !important;
+  border: 1px solid #dee2e6 !important;
+  color: #495057 !important;
+  font-size: 11px !important;
+  margin: 0 2px !important;
+  padding: 4px 8px !important;
+}
+
+.custom-grid .ag-paging-button:hover {
+  background-color: #e9ecef !important;
+}
+
+.custom-grid .ag-paging-button.ag-paging-button-disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Column resizer */
+.custom-grid .ag-header-cell-resize {
+  background-color: #dee2e6 !important;
+}
+
+/* Filter and sort icons */
+.custom-grid .ag-header-icon {
+  color: #6c757d !important;
+}
+
+/* Selection styling */
+.custom-grid .ag-row-selected {
+  background-color: #cce5ff !important;
+}
+
+/* Scrollbar styling */
+.custom-grid .ag-body-horizontal-scroll-viewport::-webkit-scrollbar,
+.custom-grid .ag-body-vertical-scroll-viewport::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.custom-grid .ag-body-horizontal-scroll-viewport::-webkit-scrollbar-track,
+.custom-grid .ag-body-vertical-scroll-viewport::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-grid .ag-body-horizontal-scroll-viewport::-webkit-scrollbar-thumb,
+.custom-grid .ag-body-vertical-scroll-viewport::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 6px;
+}
+
+.custom-grid .ag-body-horizontal-scroll-viewport::-webkit-scrollbar-thumb:hover,
+.custom-grid .ag-body-vertical-scroll-viewport::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Compact styling for dense data display */
+.container-fluid h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 1rem;
+}

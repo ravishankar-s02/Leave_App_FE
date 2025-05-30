@@ -1,11 +1,14 @@
-<div class="container-fluid mt-4 px-0">
+<div class="container-fluid mt-4 px-0" style="width: 100%;">
   <h2>My Leave Applications (AG Grid View)</h2>
-  <ag-grid-angular
-    class="ag-theme-alpine compact-grid"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [pagination]="true"
-    [paginationPageSize]="10"
-    [domLayout]="'autoHeight'">
-  </ag-grid-angular>
+  
+  <div class="grid-wrapper">
+    <ag-grid-angular
+      class="ag-theme-alpine ag-grid-full-width"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [pagination]="true"
+      [paginationPageSize]="10"
+      [domLayout]="'autoHeight'">
+    </ag-grid-angular>
+  </div>
 </div>

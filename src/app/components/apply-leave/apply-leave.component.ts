@@ -11,7 +11,7 @@ import { LeaveService } from '../../services/leave.service';
 export class ApplyLeaveComponent {
   leave: LeaveApplication = {
     employeeId: 0,
-    leaveTypeId: 1,
+    TypeName: '',
     startDate: '',
     endDate: '',
     reason: ''

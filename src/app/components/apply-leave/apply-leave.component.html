@@ -11,11 +11,20 @@
 
           <div class="card-body pt-3 tcolor">
             <div class="form-group row ps-0 pe-0 ms-0 me-0">
-              
+
               <div class="form-group d-flex align-items-center mb-2">
-                <label for="leaveTypeId" class="form-label me-3 label-fixed-width">Leave Type ID</label>
-                <input type="number" id="leaveTypeId" class="form-control flex-grow-1"
-                       [(ngModel)]="leave.leaveTypeId" name="leaveTypeId" required />
+                <label for="typeName" class="form-label me-3 label-fixed-width">Leave Type</label>
+                <select id="typeName"
+                        class="form-select flex-grow-1"
+                        [(ngModel)]="leave.TypeName"
+                        name="typeName"
+                        required>
+                  <option value="" disabled selected>Select Leave Type</option>
+                  <option value="Casual">Casual</option>
+                  <option value="Sick">Sick</option>
+                  <option value="OT">OT</option>
+                  <option value="Comp Off">Comp Off</option>
+                </select>
               </div>
 
               <div class="form-group d-flex align-items-center mb-2">

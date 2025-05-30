@@ -1,41 +1,55 @@
-<nav class="sidebar">
-    <ul>
-      <li>
-        <span>Personal</span>
-        <ul>
-          <li><a routerLink="/dashboard/personal-details">Personal Details</a></li>
-          <li><a routerLink="/dashboard/contact-details">Contact Details</a></li>
-        </ul>
-      </li>
-      <li>
-        <span>Employment</span>
-        <ul>
-          <li><a routerLink="/dashboard/job">Job</a></li>
-          <li><a routerLink="/dashboard/salary">Salary</a></li>
-        </ul>
-      </li>
-      <li>
-        <span>Qualification</span>
-        <ul>
-          <li><a routerLink="/dashboard/work-experience">Work Experience</a></li>
-          <li><a routerLink="/dashboard/education">Education</a></li>
-        </ul>
-      </li>
-      <li>
-        <span>Leave</span>
-        <ul>
-          <li><a routerLink="/dashboard/apply-leaves">Apply Leave</a></li>
-          <li><a routerLink="/dashboard/my-leaves">My Leave</a></li>
-          <li *ngIf="role === 'Admin'">
-            <a routerLink="/dashboard/all-leaves">All Leaves</a>
-          </li>
-        </ul>
-        <li *ngIf="role === 'Admin'">
-          <span>User-Details</span>
-          <ul>
-            <li><a routerLink="/dashboard/view-user">View User</a></li>
-          </ul>
-        </li>        
-    </ul>
-  </nav>
-  
+<!-- Customized Dashboard Sections -->
+<div class="container mt-4">
+  <!-- Section Card -->
+  <div class="card shadow-sm bcolor mb-2">
+    <div class="card-header bg-light border-bottom-0">
+      <h5 class="mb-0 text-primary fw-semibold hcolor">Personal</h5>
+    </div>
+    <div class="card-body pt-1 pb-1 tcolor">
+      <ul class="list-unstyled ms-3">
+        <li class="mb-2"><a routerLink="/dashboard/personal-details" class="text-decoration-none text-dark">Personal Details</a></li>
+        <li><a routerLink="/dashboard/contact-details" class="text-decoration-none text-dark">Contact Details</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Employment Section -->
+  <!-- <div class="card shadow-sm border bcolor mb-2">
+    <div class="card-header bg-light border-bottom-0">
+      <h5 class="mb-0 text-primary fw-semibold hcolor">Employment</h5>
+    </div>
+    <div class="card-body pt-1 pb-1 tcolor">
+      <ul class="list-unstyled ms-3">
+        <li class="mb-2"><a routerLink="/dashboard/job" class="text-decoration-none text-dark">Job</a></li>
+        <li><a routerLink="/dashboard/salary" class="text-decoration-none text-dark">Salary</a></li>
+      </ul>
+    </div>
+  </div> -->
+
+  <!-- Leave Section -->
+  <div class="card shadow-sm border bcolor mb-2">
+    <div class="card-header bg-light border-bottom-0">
+      <h5 class="mb-0 text-primary fw-semibold hcolor">Leave</h5>
+    </div>
+    <div class="card-body pt-1 pb-1 tcolor">
+      <ul class="list-unstyled ms-3">
+        <li class="mb-2"><a routerLink="/dashboard/apply-leaves" class="text-decoration-none text-dark">Apply Leave</a></li>
+        <li class="mb-2"><a routerLink="/dashboard/my-leaves" class="text-decoration-none text-dark">My Leave</a></li>
+        <li *ngIf="role === 'Admin'"><a routerLink="/dashboard/all-leaves" class="text-decoration-none text-dark">All Leaves</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- User Details (Admin only) -->
+  <div *ngIf="role === 'Admin'" class="card shadow-sm border bcolor mb-1">
+    <div class="card-header bg-light border-bottom-0">
+      <h5 class="mb-0 text-primary fw-semibold hcolor">User Details</h5>
+    </div>
+    <div class="card-body pt-1 pb-1 tcolor">
+      <ul class="list-unstyled ms-3">
+        <li class="mb-2"><a routerLink="/dashboard/view-user" class="text-decoration-none text-dark">View User</a></li>
+        <li><a routerLink="/dashboard/register" class="text-decoration-none text-dark">Add User</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

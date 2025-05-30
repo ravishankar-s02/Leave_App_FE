@@ -13,8 +13,10 @@ export class LeaveService {
 
   constructor(private http: HttpClient) {}
 
-  register(emp: Employee): Observable<any> {
-    return this.http.post(`${this.api}/Employee/register`, emp);
+  register(emp: Employee): Observable<string> {
+    return this.http.post(`${this.api}/Employee/register`, emp, {
+      responseType: 'text'
+    });
   }
 
   login(data: Login): Observable<Employee> {
@@ -43,5 +45,13 @@ export class LeaveService {
 
   savePersonalDetails(details: any): Observable<any> {
     return this.http.post(`${this.api}/personal-details/save`, details);
+  }
+
+  getContactDetails(employeeId: number): Observable<any> {
+    return this.http.get<any>(`${this.api}/contact-details/${employeeId}`);
+  }
+
+  saveContactDetails(details: any): Observable<any> {
+    return this.http.post(`${this.api}/contact-details/save`, details);
   }
 }

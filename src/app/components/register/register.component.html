@@ -1,50 +1,48 @@
 <div class="container mt-4">
   <form #form="ngForm" (ngSubmit)="register()" novalidate>
-    <div class="container">
-      <div class="row my-5">
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <div class="fs-1 fw-bold">
-            <img src="assets/ss.png" alt="Company Logo" class="logo" />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card shadow-sm border bcolor">
+          <div class="card-header bg-light border-bottom-0">
+            <h5 class="mb-0 text-primary fw-semibold hcolor">Create Account</h5>
           </div>
-        </div>
-        <div class="col-md-6 my-5">
-          <div class="border rounded p-5">
-            <div class="text-center">
-              <h3 class="fw-bold">Create Account</h3>
-              <p class="text-secondary">Fill the form to sign up</p>
-            </div>
-            <div>
-              <div class="form-floating mb-3">                
-                <input class="form-control" [(ngModel)]="emp.name" placeholder="Name" name="name" required />
-                <label>Name</label>
+
+          <div class="card-body pt-3 tcolor">
+            <div class="form-group row ps-0 pe-0 ms-0 me-0">
+
+              <div class="form-group d-flex align-items-center mb-2 w-100">
+                <label class="form-label me-3 label-fixed-width">Name</label>
+                <input class="form-control flex-grow-1" [(ngModel)]="emp.name" placeholder="Name" name="name" required />
               </div>
-              <div class="form-floating mb-3">
-                <input class="form-control" [(ngModel)]="emp.email" id="floatingInputEmail" placeholder="Email" name="email" required />
-                <label for="floatingInputEmail">Email</label>
+
+              <div class="form-group d-flex align-items-center mb-2 w-100">
+                <label for="floatingInputEmail" class="form-label me-3 label-fixed-width">Email</label>
+                <input class="form-control flex-grow-1" [(ngModel)]="emp.email" id="floatingInputEmail" placeholder="Email" name="email" required />
               </div>
-              <div class="form-floating mb-3">                
-                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="emp.password" name="password" required />
-                <label>Password</label>
+
+              <div class="form-group d-flex align-items-center mb-2 w-100">
+                <label class="form-label me-3 label-fixed-width">Password</label>
+                <input type="password" class="form-control flex-grow-1" placeholder="Password" [(ngModel)]="emp.password" name="password" required />
               </div>
-              
-              <div class="form-floating mb-3">
+
+              <div class="form-group d-flex align-items-center mb-3 w-100">
+                <label class="form-label me-3 label-fixed-width">Role</label>
                 <select class="form-select" [(ngModel)]="emp.role" name="role" required>
+                  <option value="" disabled>Select Role</option>
                   <option value="User">User</option>
                   <option value="Admin">Admin</option>
                 </select>
-                <label>Role</label>
               </div>
 
-              <div class="d-grid gap-2 mb-3">
-                <button class="btn btn-success" type="submit" [disabled]="!form.valid">Register</button>
-              </div>
-              <!-- <div class="alert alert-secondary text-center mb-0" role="alert">
-                Already have an account? <a routerLink="/auth/login" class="alert-link">Login Here</a>
-              </div> -->
             </div>
+
+            <div class="d-flex justify-content-center mt-2">
+              <button class="btn btn-success primarybtn" type="submit" [disabled]="!form.valid">Register</button>
+            </div>
+
           </div>
         </div>
       </div>
-    </div>    
+    </div>
   </form>
 </div>

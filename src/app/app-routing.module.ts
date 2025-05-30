@@ -39,6 +39,7 @@ const routes: Routes = [
       { path: 'apply-leaves', component: ApplyLeaveComponent },
       { path: 'my-leaves', component: MyLeavesComponent },
       { path: 'all-leaves', component: AllLeavesComponent },
+      { path: 'register', component: RegisterComponent },
 
       // ✅ Add the new admin-only route
       { path: 'view-user', component: ViewUserComponent }

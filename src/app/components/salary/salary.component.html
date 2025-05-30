@@ -1,1 +1,54 @@
-<p>salary works!</p>
+<div class="container mt-4">
+    <form [formGroup]="salaryForm" (ngSubmit)="onSubmitts()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card shadow-sm border bcolor">
+            <div class="card-header bg-light border-bottom-0">
+              <h5 class="mb-0 text-primary fw-semibold hcolor">User Details</h5>
+            </div>
+  
+            <div class="card-body pt-3 tcolor">
+              <div class="form-group row ps-0 pe-0 ms-0 me-0">
+
+                <div class="form-group d-flex align-items-center mb-3">
+                    <label for="payGrade" class="form-label me-3 label-fixed-width">Pay Grade</label>
+                    <input type="text" id="payGrade" class="form-control flex-grow-1" formControlName="payGrade" [readonly]="!isAdmin" />
+                  </div>
+   
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label class="form-label me-3 label-fixed-width">Currency</label>
+                  <select class="form-select" formControlName="currency" [disabled]="!isAdmin">
+                    <option value="" disabled>Select Currency</option>
+                    <option value="Front">Rupee</option>
+                    <option value="Back">Dollar</option>
+                  </select>
+                </div>
+
+                <div class="form-group d-flex align-items-center mb-3">
+                    <label for="basicSalary" class="form-label me-3 label-fixed-width">Basic Salary</label>
+                    <input type="text" id="basicSalary" class="form-control flex-grow-1" formControlName="basicSalary" [readonly]="!isAdmin" />
+                  </div>
+
+                <div class="form-group d-flex align-items-center mb-2">
+                    <label class="form-label me-3 label-fixed-width">Pay Frequency</label>
+                    <select class="form-select" formControlName="payFrequency" [disabled]="!isAdmin">
+                      <option value="" disabled>Select Pay Frequency</option>
+                      <option value="text">Daily</option>
+                      <option value="text">Weekly</option>
+                      <option value="text">Monthly</option>
+                      <option value="text">Yearly</option>
+                    </select>
+                </div>
+
+              </div>
+  
+              <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
+                <button type="submit" class="btn btn-primary primarybtn">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  

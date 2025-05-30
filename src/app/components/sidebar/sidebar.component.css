@@ -1,34 +1,20 @@
-.sidebar {
-    width: 220px;
-    background-color: #f8f9fa;
-    padding: 20px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar li > span {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .sidebar li ul {
-    margin-left: 15px;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #007bff;
-  }
-  
-  .sidebar a:hover {
-    text-decoration: underline;
-  }
-  
+.hcolor {
+  color: #3b6caa !important;
+}
+
+.card-header{
+  background-color: rgba(33,37,41, 0.03);
+}
+
+.tcolor {
+  color: #333;
+  font-size: 0.75rem;
+}
+
+.bcolor {
+  border-color: #ccc !important;
+}
+
+.card{
+  border-radius: 5px !important;
+}

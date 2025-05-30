@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaveService } from '../../services/leave.service';
 
 @Component({
@@ -19,15 +19,15 @@ export class PersonalDetailsComponent implements OnInit {
     this.isAdmin = role === 'Admin';
 
     this.personalForm = this.fb.group({
-      employeeId: [''],
-      firstName: [''],
-      lastName: [''],
-      dob: [''],
-      gender: [''],
-      email: [''],
-      maritalStatus: [''],
-      nationality: ['']
+      employeeId: ['', Validators.required],
+      name: ['', [Validators.required]],
+      dob: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      maritalStatus: ['', [Validators.required]],
+      nationality: ['', [Validators.required]]
     });
+    
 
     // Determine whose data to load: own or admin-view
     let employeeId = localStorage.getItem('employeeId');
@@ -58,11 +58,21 @@ export class PersonalDetailsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.personalForm.valid && this.isAdmin) {
+    if (this.personalForm.invalid) {
+      this.personalForm.markAllAsTouched(); // Show all validation errors
+      alert('Please fill all required fields correctly.');
+      return;
+    }
+  
+    if (this.isAdmin) {
       this.service.savePersonalDetails(this.personalForm.value).subscribe({
-        next: () => alert('Details saved successfully'),
-        error: () => alert('Failed to save details')
+        next: (response) => {
+          alert(response?.message || 'Details saved successfully');
+        },
+        error: (error) => {
+          alert(error?.error?.message || 'Failed to save details');
+        }
       });
     }
-  }
+  }   
 }

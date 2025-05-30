@@ -16,18 +16,17 @@ export class RegisterComponent {
   register() {
     this.service.register(this.emp).subscribe({
       next: res => {
-        alert('Registered successfully!');
-        this.router.navigate(['/']); // navigate to login
-      },
-      error: err => {
-        if (err.status === 200) {
+        if (res === 'Registered successfully.') {
           alert('Registered successfully!');
           this.router.navigate(['/']);
         } else {
-          alert('Registration failed');
-          console.error(err);
+          alert(res); // Show error like "Email already exists."
         }
+      },
+      error: err => {
+        alert('Registration failed.');
+        console.error(err);
       }
     });
-  }
+  }  
 }
