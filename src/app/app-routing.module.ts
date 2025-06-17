@@ -8,7 +8,6 @@ import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
 import { AllLeavesComponent } from './components/all-leaves/all-leaves.component';
 import { LeaveSummaryComponent } from './components/leave-summary/leave-summary.component';
 import { UploadLeaveComponent } from './components/upload-leave/upload-leave.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PersonalDetailsComponent } from './components/personal-details/personal-details.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
@@ -48,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminDashboardComponent,
+    component: DashboardComponent,
     canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveApplication } from '../../models/leave.model';
 import { LeaveService } from '../../services/leave.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-apply-leave',

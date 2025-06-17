@@ -10,7 +10,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { ApplyLeaveComponent } from './components/apply-leave/apply-leave.component';
 import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
 import { AllLeavesComponent } from './components/all-leaves/all-leaves.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -41,7 +40,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     ApplyLeaveComponent,
     MyLeavesComponent,
     AllLeavesComponent,
-    AdminDashboardComponent,
     DashboardComponent,
     HeaderComponent,
     SidebarComponent,
@@ -58,6 +56,7 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
