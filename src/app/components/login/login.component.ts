@@ -1,31 +1,52 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveService } from '../../services/leave.service';
-import { Login } from '../../models/login.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  standalone:false
+  styleUrls: ['./login.component.css'],
+  standalone: false
 })
 export class LoginComponent {
-  loginData: Login = { name: '', password: '' };
+  loginData = {
+    firstName: '',
+    password: ''
+  };
+
+  isLoading: boolean = false;
+  errorMsg: string = '';
 
   constructor(private service: LeaveService, private router: Router) {}
 
   login() {
+    this.isLoading = true;
+    this.errorMsg = '';
+
     this.service.login(this.loginData).subscribe({
-      next: res => {
+      next: (res) => {
+        this.isLoading = false;
+
         if (res.employeeId) {
+          // ✅ STEP 4: Store login info in localStorage
+          localStorage.setItem('token', 'valid');
           localStorage.setItem('employeeId', res.employeeId.toString());
-          localStorage.setItem('name', res.name); // assuming 'name' comes from backend
-          localStorage.setItem('role', res.role); // 👈 save role
-          this.router.navigate(['/dashboard/personal-details']);
+          localStorage.setItem('firstName', res.firstName);
+          localStorage.setItem('role', res.role);
+
+          // Optional: clear adminViewEmployeeId if present
+          localStorage.removeItem('adminViewEmployeeId');
+
+          // ✅ Redirect to dashboard after successful login
+          this.router.navigate(['/dashboard/apply-leave'], { replaceUrl: true });
         } else {
-          alert('Login successful, but employee ID is missing.');
+          this.errorMsg = 'Login failed: Invalid response from server.';
         }
       },
-      error: () => alert('Invalid login credentials')
-    });    
-  }  
+      error: () => {
+        this.isLoading = false;
+        this.errorMsg = 'Invalid login credentials. Please try again.';
+      }
+    });
+  }
 }

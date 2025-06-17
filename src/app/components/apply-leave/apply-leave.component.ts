@@ -6,6 +6,7 @@ import { LeaveService } from '../../services/leave.service';
 @Component({
   selector: 'app-apply-leave',
   templateUrl: './apply-leave.component.html',
+  styleUrls: ['./apply-leave.component.css'],
   standalone: false
 })
 export class ApplyLeaveComponent {
@@ -22,16 +23,27 @@ export class ApplyLeaveComponent {
     this.leave.employeeId = id ? parseInt(id) : 0;
   }
 
-  apply() {
+  apply(): void {
     this.service.applyLeave(this.leave).subscribe({
-      next: (res: any) => {
+      next: (res: { message: string }) => {
         alert(res.message || 'Leave applied successfully!');
-        // this.router.navigate(['/my-leaves']);
+        this.resetForm();
+        this.router.navigate(['/my-leaves']);
       },
       error: (err) => {
         alert(err.error?.message || 'Failed to apply leave.');
         console.error(err);
       }
     });
+  }
+
+  resetForm(): void {
+    this.leave = {
+      employeeId: this.leave.employeeId,
+      TypeName: '',
+      startDate: '',
+      endDate: '',
+      reason: ''
+    };
   }
 }

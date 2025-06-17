@@ -2,6 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeaveService } from '../../services/leave.service';
 
+interface PersonalDetails {
+  employeeId: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  dob: string;
+  gender: string;
+  email: string;
+  maritalStatus: string;
+  nationality: string;
+}
+
 @Component({
   selector: 'app-personal-details',
   templateUrl: './personal-details.component.html',
@@ -11,68 +23,81 @@ import { LeaveService } from '../../services/leave.service';
 export class PersonalDetailsComponent implements OnInit {
   personalForm!: FormGroup;
   isAdmin: boolean = false;
+  loading: boolean = true;
 
   constructor(private fb: FormBuilder, private service: LeaveService) {}
 
   ngOnInit(): void {
-    const role = localStorage.getItem('role');
-    this.isAdmin = role === 'Admin';
+    this.isAdmin = localStorage.getItem('role') === 'Admin';
 
     this.personalForm = this.fb.group({
       employeeId: ['', Validators.required],
-      name: ['', [Validators.required]],
-      dob: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
+      firstName: ['', Validators.required],
+      middleName: [''], // Optional
+      lastName: ['', Validators.required],
+      dob: ['', Validators.required],
+      gender: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      maritalStatus: ['', [Validators.required]],
-      nationality: ['', [Validators.required]]
+      maritalStatus: ['', Validators.required],
+      nationality: ['', Validators.required]
     });
-    
 
-    // Determine whose data to load: own or admin-view
-    let employeeId = localStorage.getItem('employeeId');
-    const adminViewId = localStorage.getItem('adminViewEmployeeId');
-    if (this.isAdmin && adminViewId) {
-      employeeId = adminViewId;
-    }
+    const employeeId = this.getTargetEmployeeId();
 
     if (employeeId) {
       this.service.getPersonalDetails(+employeeId).subscribe({
-        next: data => {
-          // Format the date to yyyy-MM-dd
-          if (data.dob) {
-            const dob = new Date(data.dob);
-            const formattedDob = dob.toISOString().split('T')[0];
-            data.dob = formattedDob;
+        next: (data: PersonalDetails) => {
+          if (data?.dob) {
+            data.dob = this.formatDateToLocalYYYYMMDD(data.dob);
           }
+
           this.personalForm.patchValue(data);
 
-          // Disable form for non-admin
           if (!this.isAdmin) {
-            this.personalForm.disable(); // disable entire form
+            this.personalForm.disable(); // Disable for non-admins
           }
+
+          this.loading = false;
         },
-        error: err => console.error('Error loading personal details', err)
+        error: err => {
+          console.error('Error loading personal details:', err);
+          this.loading = false;
+        }
       });
+    } else {
+      this.loading = false;
     }
   }
 
   onSubmit(): void {
     if (this.personalForm.invalid) {
-      this.personalForm.markAllAsTouched(); // Show all validation errors
+      this.personalForm.markAllAsTouched();
       alert('Please fill all required fields correctly.');
       return;
     }
-  
+
     if (this.isAdmin) {
       this.service.savePersonalDetails(this.personalForm.value).subscribe({
-        next: (response) => {
+        next: response => {
           alert(response?.message || 'Details saved successfully');
         },
-        error: (error) => {
+        error: error => {
           alert(error?.error?.message || 'Failed to save details');
         }
       });
     }
-  }   
+  }
+
+  private getTargetEmployeeId(): string | null {
+    const adminViewId = localStorage.getItem('adminViewEmployeeId');
+    const ownId = localStorage.getItem('employeeId');
+    return this.isAdmin && adminViewId ? adminViewId : ownId;
+  }
+
+  private formatDateToLocalYYYYMMDD(dateString: string): string {
+    const date = new Date(dateString);
+    const offset = date.getTimezoneOffset();
+    date.setMinutes(date.getMinutes() - offset);
+    return date.toISOString().substring(0, 10);
+  }
 }

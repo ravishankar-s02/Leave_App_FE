@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <form (ngSubmit)="login()">
+  <form #loginForm="ngForm" (ngSubmit)="login()" novalidate>
     <div class="container">
       <div class="row my-5">
         <div class="col-md-8 d-flex justify-content-center align-items-center">
@@ -7,25 +7,72 @@
             <img src="assets/ss.png" alt="Company Logo" class="logo" />
           </div>
         </div>
+
         <div class="col-md-4 my-5">
           <div class="border rounded p-5">
             <div class="text-center">
               <h3 class="fw-bold">Welcome!</h3>
               <p class="text-secondary">Login to Continue</p>
             </div>
-            <div>
-              <div class="form-floating mb-3">                
-                <input class="form-control"  [(ngModel)]="loginData.name" placeholder="Name" name="name" required />
-                <label>Name</label>
-              </div>
-              <div class="form-floating mb-3 ">                
-                <input type="password" class="form-control" [(ngModel)]="loginData.password" placeholder="Password" name="password" required />
-                <label>Password</label>
-              </div>
-              <div class="text-center">
-                <button class="btn btn-primary primarybtn" style="color: black"  type="submit">Login</button>
+
+            <!-- Name Input -->
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="loginData.firstName"
+                name="firstName"
+                placeholder="Name"
+                required
+                #firstName="ngModel"
+              />
+              <label>Name</label>
+              <div *ngIf="firstName.invalid && firstName.touched" class="text-danger ms-2 small">
+                Name is required.
               </div>
             </div>
+
+            <!-- Password Input -->
+            <div class="form-floating mb-3">
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="loginData.password"
+                name="password"
+                placeholder="Password"
+                required
+                #password="ngModel"
+              />
+              <label>Password</label>
+              <div *ngIf="password.invalid && password.touched" class="text-danger ms-2 small">
+                Password is required.
+              </div>
+            </div>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMsg" class="text-danger text-center small mb-2">
+              {{ errorMsg }}
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="text-center" *ngIf="isLoading">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+
+            <!-- Login Button -->
+            <div class="text-center mt-2">
+              <button
+                class="btn btn-primary primarybtn"
+                style="color: black"
+                type="submit"
+                [disabled]="loginForm.invalid || isLoading"
+              >
+                Login
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

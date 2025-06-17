@@ -1,7 +1,7 @@
 <div class="container mt-4">
-  <form (ngSubmit)="apply()">
+  <form (ngSubmit)="apply()" #leaveForm="ngForm" novalidate>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="card shadow-sm border bcolor">
           <div class="card-header bg-light border-bottom-0">
             <h5 class="mb-0 text-primary fw-semibold hcolor">
@@ -12,41 +12,41 @@
           <div class="card-body pt-3 tcolor">
             <div class="form-group row ps-0 pe-0 ms-0 me-0">
 
-              <div class="form-group d-flex align-items-center mb-2">
+              <div class="form-group d-flex align-items-center mb-3">
                 <label for="typeName" class="form-label me-3 label-fixed-width">Leave Type</label>
                 <select id="typeName"
                         class="form-select flex-grow-1"
                         [(ngModel)]="leave.TypeName"
                         name="typeName"
                         required>
-                  <option value="" disabled selected>Select Leave Type</option>
+                  <option value="" disabled>Select Leave Type</option>
                   <option value="Casual">Casual</option>
-                  <option value="Sick">Sick</option>
+                  <option value="LOP">LOP</option>
                   <option value="OT">OT</option>
                   <option value="Comp Off">Comp Off</option>
                 </select>
               </div>
 
-              <div class="form-group d-flex align-items-center mb-2">
+              <div class="form-group d-flex align-items-center mb-3">
                 <label for="startDate" class="form-label me-3 label-fixed-width">Start Date</label>
                 <input type="date" id="startDate" class="form-control flex-grow-1"
                        [(ngModel)]="leave.startDate" name="startDate" required />
               </div>
 
-              <div class="form-group d-flex align-items-center mb-2">
+              <div class="form-group d-flex align-items-center mb-3">
                 <label for="endDate" class="form-label me-3 label-fixed-width">End Date</label>
                 <input type="date" id="endDate" class="form-control flex-grow-1"
                        [(ngModel)]="leave.endDate" name="endDate" required />
               </div>
 
-              <div class="form-group d-flex align-items-center mb-2">
+              <div class="form-group d-flex align-items-center mb-3">
                 <label for="reason" class="form-label me-3 label-fixed-width">Reason</label>
                 <textarea id="reason" class="form-control flex-grow-1"
                           [(ngModel)]="leave.reason" name="reason" required></textarea>
               </div>
 
-              <div class="d-flex justify-content-center mt-2">
-                <button type="submit" class="btn btn-primary primarybtn">
+              <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary primarybtn" [disabled]="!leaveForm.valid">
                   Submit
                 </button>
               </div>

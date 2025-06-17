@@ -1,193 +1,115 @@
 <div class="container mt-4">
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card shadow-sm border bcolor">
-                    <div class="card-header bg-light border-bottom-0">
-                        <h5 class="mb-0 text-primary fw-semibold hcolor">
-                            Contact Details
-                        </h5>
-                    </div>
-
-                    <div class="card-body pt-3 tcolor">
-                        <div class="form-group row ps-0 pe-0 ms-0 me-0">
-                            <!-- Phone Number -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="phoneNumber" class="form-label me-3 label-fixed-width">Phone Number</label>
-                                <input type="tel" id="phoneNumber" class="form-control flex-grow-1"
-                                    formControlName="phoneNumber" [readonly]="!isAdmin" [class.is-invalid]="
-                    contactForm.get('phoneNumber')?.invalid &&
-                    (contactForm.get('phoneNumber')?.touched ||
-                      contactForm.get('phoneNumber')?.dirty)
-                  " />
-                            </div>
-                            <div *ngIf="
-                  contactForm.get('phoneNumber')?.errors &&
-                  (contactForm.get('phoneNumber')?.touched ||
-                    contactForm.get('phoneNumber')?.dirty)
-                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('phoneNumber')?.errors?.['required']">
-                                    Phone Number is required.
-                                </div>
-                                <div *ngIf="contactForm.get('phoneNumber')?.errors?.['pattern']">
-                                    Invalid phone number format.
-                                </div>
-                            </div>
-
-                            <!-- Alternate Number -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="alternateNumber" class="form-label me-3 label-fixed-width">Alternate
-                                    Number</label>
-                                <input type="tel" id="alternateNumber" class="form-control flex-grow-1"
-                                    formControlName="alternateNumber" [readonly]="!isAdmin" [class.is-invalid]="
-                    contactForm.get('alternateNumber')?.invalid &&
-                    (contactForm.get('alternateNumber')?.touched ||
-                      contactForm.get('alternateNumber')?.dirty)
-                  " />
-                            </div>
-                            <div *ngIf="
-                  contactForm.get('alternateNumber')?.errors &&
-                  (contactForm.get('alternateNumber')?.touched ||
-                    contactForm.get('alternateNumber')?.dirty)
-                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('alternateNumber')?.errors?.['pattern']">
-                                    Invalid phone number format.
-                                </div>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="email" class="form-label me-3 label-fixed-width">Email</label>
-                                <input type="email" id="email" class="form-control flex-grow-1" formControlName="email"
-                                    [readonly]="!isAdmin" [class.is-invalid]="
-                    contactForm.get('email')?.invalid &&
-                    (contactForm.get('email')?.touched ||
-                      contactForm.get('email')?.dirty)
-                  " />
-                            </div>
-                            <div *ngIf="
-                  contactForm.get('email')?.errors &&
-                  (contactForm.get('email')?.touched ||
-                    contactForm.get('email')?.dirty)
-                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('email')?.errors?.['required']">
-                                    Email is required.
-                                </div>
-                                <div *ngIf="contactForm.get('email')?.errors?.['email']">
-                                    Invalid email format.
-                                </div>
-                            </div>
-
-                            <!-- Street Address -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="streetAddress" class="form-label me-3 label-fixed-width">Street
-                                    Address</label>
-                                <input type="text" id="streetAddress" class="form-control flex-grow-1"
-                                    formControlName="streetAddress" [readonly]="!isAdmin" [class.is-invalid]="
-                                    contactForm.get('streetAddress')?.invalid &&
-                                    (contactForm.get('streetAddress')?.touched ||
-                                    contactForm.get('streetAddress')?.dirty)
-                                " />
-                                            </div>
-                                            <div *ngIf="
-                                contactForm.get('streetAddress')?.errors &&
-                                (contactForm.get('streetAddress')?.touched ||
-                                    contactForm.get('streetAddress')?.dirty)
-                                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('streetAddress')?.errors?.['required']">
-                                    Street Address is required.
-                                </div>  
-                            </div>
-
-              <!-- City -->
-              <div class="form-group d-flex align-items-center mb-2">
-                <label for="city" class="form-label me-3 label-fixed-width">City</label>
-                <input
-                  type="text"
-                  id="city"
-                  class="form-control flex-grow-1"
-                  formControlName="city"
-                  [readonly]="!isAdmin"
-                  [class.is-invalid]="contactForm.get('city')?.invalid && (contactForm.get('city')?.touched || contactForm.get('city')?.dirty)"
-                />
-              </div>
-              <div *ngIf="contactForm.get('city')?.errors && (contactForm.get('city')?.touched || contactForm.get('city')?.dirty)" class="invalid-feedback d-block ms-5">
-                <div *ngIf="contactForm.get('city')?.errors?.['required']">City is required.</div>
-              </div>
-
-
-                            <!-- State -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="state" class="form-label me-3 label-fixed-width">State</label>
-                                <input type="text" id="state" class="form-control flex-grow-1" formControlName="state"
-                                    [readonly]="!isAdmin" [class.is-invalid]="
-                    contactForm.get('state')?.invalid &&
-                    (contactForm.get('state')?.touched ||
-                      contactForm.get('state')?.dirty)
-                  " />
-                            </div>
-                            <div *ngIf="
-                  contactForm.get('state')?.errors &&
-                  (contactForm.get('state')?.touched ||
-                    contactForm.get('state')?.dirty)
-                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('state')?.errors?.['required']">
-                                    State is required.
-                                </div>
-                            </div>
-
-                            <!-- Zip/Postal Code -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="zipCode" class="form-label me-3 label-fixed-width">Zip/Postal Code</label>
-                                <input type="text" id="zipCode" class="form-control flex-grow-1"
-                                    formControlName="zipCode" [readonly]="!isAdmin" [class.is-invalid]="
-                    contactForm.get('zipCode')?.invalid &&
-                    (contactForm.get('zipCode')?.touched ||
-                      contactForm.get('zipCode')?.dirty)
-                  " />
-                            </div>
-                            <div *ngIf="
-                  contactForm.get('zipCode')?.errors &&
-                  (contactForm.get('zipCode')?.touched ||
-                    contactForm.get('zipCode')?.dirty)
-                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('zipCode')?.errors?.['required']">
-                                    Zip/Postal Code is required.
-                                </div>
-                                <div *ngIf="contactForm.get('zipCode')?.errors?.['pattern']">
-                                    Invalid Zip/Postal Code format.
-                                </div>
-                            </div>
-
-                            <!-- Country -->
-                            <div class="form-group d-flex align-items-center mb-2">
-                                <label for="country" class="form-label me-3 label-fixed-width">Country</label>
-                                <input type="text" id="country" class="form-control flex-grow-1"
-                                    formControlName="country" [readonly]="!isAdmin" [class.is-invalid]="
-                    contactForm.get('country')?.invalid &&
-                    (contactForm.get('country')?.touched ||
-                      contactForm.get('country')?.dirty)
-                  " />
-                            </div>
-                            <div *ngIf="
-                  contactForm.get('country')?.errors &&
-                  (contactForm.get('country')?.touched ||
-                    contactForm.get('country')?.dirty)
-                " class="invalid-feedback d-block ms-5">
-                                <div *ngIf="contactForm.get('country')?.errors?.['required']">
-                                    Country is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
-                            <button type="submit" class="btn btn-primary primarybtn" [disabled]="contactForm.invalid">
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card shadow-sm border bcolor">
+            <div class="card-header bg-light border-bottom-0">
+              <h5 class="mb-0 text-primary fw-semibold hcolor">Contact Details</h5>
             </div>
+  
+            <div class="card-body pt-3 tcolor">
+              <div class="form-group row ps-0 pe-0 ms-0 me-0">
+  
+                <!-- Phone Number -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="phoneNumber" class="form-label me-3 label-fixed-width">Phone Number</label>
+                  <input type="tel" id="phoneNumber" class="form-control flex-grow-1"
+                    formControlName="phoneNumber" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('phoneNumber')" />
+                </div>
+                <div *ngIf="hasError('phoneNumber')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('phoneNumber')?.errors?.['required']">Phone Number is required.</div>
+                  <div *ngIf="contactForm.get('phoneNumber')?.errors?.['pattern']">Invalid phone number format.</div>
+                </div>
+  
+                <!-- Alternate Number -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="alternateNumber" class="form-label me-3 label-fixed-width">Alternate Number</label>
+                  <input type="tel" id="alternateNumber" class="form-control flex-grow-1"
+                    formControlName="alternateNumber" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('alternateNumber')" />
+                </div>
+                <div *ngIf="hasError('alternateNumber')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('alternateNumber')?.errors?.['pattern']">Invalid phone number format.</div>
+                </div>
+  
+                <!-- Email -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="email" class="form-label me-3 label-fixed-width">Email</label>
+                  <input type="email" id="email" class="form-control flex-grow-1"
+                    formControlName="email" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('email')" />
+                </div>
+                <div *ngIf="hasError('email')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</div>
+                  <div *ngIf="contactForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                </div>
+  
+                <!-- Street Address -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="streetAddress" class="form-label me-3 label-fixed-width">Street Address</label>
+                  <input type="text" id="streetAddress" class="form-control flex-grow-1"
+                    formControlName="streetAddress" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('streetAddress')" />
+                </div>
+                <div *ngIf="hasError('streetAddress')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('streetAddress')?.errors?.['required']">Street Address is required.</div>
+                </div>
+  
+                <!-- City -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="city" class="form-label me-3 label-fixed-width">City</label>
+                  <input type="text" id="city" class="form-control flex-grow-1"
+                    formControlName="city" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('city')" />
+                </div>
+                <div *ngIf="hasError('city')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('city')?.errors?.['required']">City is required.</div>
+                </div>
+  
+                <!-- State -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="state" class="form-label me-3 label-fixed-width">State</label>
+                  <input type="text" id="state" class="form-control flex-grow-1"
+                    formControlName="state" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('state')" />
+                </div>
+                <div *ngIf="hasError('state')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('state')?.errors?.['required']">State is required.</div>
+                </div>
+  
+                <!-- Zip Code -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="zipCode" class="form-label me-3 label-fixed-width">Zip/Postal Code</label>
+                  <input type="text" id="zipCode" class="form-control flex-grow-1"
+                    formControlName="zipCode" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('zipCode')" />
+                </div>
+                <div *ngIf="hasError('zipCode')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('zipCode')?.errors?.['required']">Zip/Postal Code is required.</div>
+                  <div *ngIf="contactForm.get('zipCode')?.errors?.['pattern']">Invalid Zip Code format.</div>
+                </div>
+  
+                <!-- Country -->
+                <div class="form-group d-flex align-items-center mb-2">
+                  <label for="country" class="form-label me-3 label-fixed-width">Country</label>
+                  <input type="text" id="country" class="form-control flex-grow-1"
+                    formControlName="country" [readonly]="!isAdmin"
+                    [class.is-invalid]="isInvalid('country')" />
+                </div>
+                <div *ngIf="hasError('country')" class="invalid-feedback d-block ms-5">
+                  <div *ngIf="contactForm.get('country')?.errors?.['required']">Country is required.</div>
+                </div>
+  
+              </div>
+  
+              <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
+                <button type="submit" class="btn btn-primary primarybtn" [disabled]="contactForm.invalid">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </form>
-</div>
+  </div>
+  

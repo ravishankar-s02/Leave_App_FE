@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { LeaveService } from '../../services/leave.service';
 
 @Component({
-  selector: 'app-personal-details',
+  selector: 'app-salary',
   templateUrl: './salary.component.html',
   styleUrls: ['./salary.component.css'],
   standalone: false
@@ -11,55 +11,66 @@ import { LeaveService } from '../../services/leave.service';
 export class SalaryComponent implements OnInit {
   salaryForm!: FormGroup;
   isAdmin: boolean = false;
+  employeeId: number = 0;
 
   constructor(private fb: FormBuilder, private service: LeaveService) {}
 
   ngOnInit(): void {
-    const role = localStorage.getItem('role');
-    this.isAdmin = role === 'Admin';
+    this.setUserContext();
+    this.initForm();
+    this.loadSalaryDetails();
+  }
 
+  private setUserContext(): void {
+    const role = localStorage.getItem('role');
+    const ownId = localStorage.getItem('employeeId');
+    const adminViewId = localStorage.getItem('adminViewEmployeeId');
+
+    this.isAdmin = role === 'Admin';
+    this.employeeId = this.isAdmin && adminViewId ? +adminViewId : +(ownId ?? 0);
+  }
+
+  private initForm(): void {
     this.salaryForm = this.fb.group({
-      employeeId: [''],
+      employeeId: [this.employeeId],
       payGrade: [''],
       currency: [''],
       basicSalary: [''],
       payFrequency: ['']
     });
 
-    // Determine whose data to load: own or admin-view
-    let employeeId = localStorage.getItem('employeeId');
-    const adminViewId = localStorage.getItem('adminViewEmployeeId');
-    if (this.isAdmin && adminViewId) {
-      employeeId = adminViewId;
-    }
-
-    if (employeeId) {
-      this.service.getPersonalDetails(+employeeId).subscribe({
-        next: data => {
-          // Format the date to yyyy-MM-dd
-          if (data.dob) {
-            const dob = new Date(data.dob);
-            const formattedDob = dob.toISOString().split('T')[0];
-            data.dob = formattedDob;
-          }
-          this.salaryForm.patchValue(data);
-
-          // Disable form for non-admin
-          if (!this.isAdmin) {
-            this.salaryForm.disable(); // disable entire form
-          }
-        },
-        error: err => console.error('Error loading personal details', err)
-      });
+    if (!this.isAdmin) {
+      this.salaryForm.disable(); // Read-only for non-admin
     }
   }
 
+  private loadSalaryDetails(): void {
+    if (!this.employeeId) return;
+
+    this.service.getSalary(this.employeeId).subscribe({
+      next: (data) => {
+        this.salaryForm.patchValue({
+          ...data,
+          employeeId: this.employeeId
+        });
+      },
+      error: (err) => {
+        console.error('Error loading salary details:', err);
+      }
+    });
+  }
+
   onSubmitts(): void {
-    if (this.salaryForm.valid && this.isAdmin) {
-      this.service.savePersonalDetails(this.salaryForm.value).subscribe({
-        next: () => alert('Details saved successfully'),
-        error: () => alert('Failed to save details')
-      });
-    }
+    if (!this.isAdmin) return;
+
+    const dataToSave = {
+      ...this.salaryForm.getRawValue(),
+      employeeId: this.employeeId
+    };
+
+    this.service.saveSalary(dataToSave).subscribe({
+      next: () => alert('Details saved successfully'),
+      error: () => alert('Failed to save details')
+    });
   }
 }

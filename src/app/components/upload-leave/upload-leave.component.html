@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <form [formGroup]="uploadForm" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="card shadow-sm border bcolor">
+          <div class="card-header bg-light border-bottom-0">
+            <h5 class="mb-0 text-primary fw-semibold hcolor">Upload Leave Balance</h5>
+          </div>
+
+          <div class="card-body pt-3 tcolor">
+            
+            <!-- Employee ID -->
+            <div class="form-group d-flex align-items-center mb-2">
+              <label class="form-label me-3 label-fixed-width">Employee ID</label>
+              <input formControlName="employeeId" class="form-control flex-grow-1" />
+            </div>
+            <div *ngIf="uploadForm.get('employeeId')?.touched && uploadForm.get('employeeId')?.invalid" class="invalid-feedback d-block ms-5">
+              Employee ID is required.
+            </div>
+
+            <!-- Year -->
+            <div class="form-group d-flex align-items-center mb-2">
+              <label class="form-label me-3 label-fixed-width">Year</label>
+              <input formControlName="year" class="form-control flex-grow-1" type="number" />
+            </div>
+            <div *ngIf="uploadForm.get('year')?.touched && uploadForm.get('year')?.invalid" class="invalid-feedback d-block ms-5">
+              Year is required.
+            </div>
+
+            <!-- Leave Balances -->
+            <div formGroupName="balances">
+              <div *ngFor="let type of leaveTypes" class="form-group d-flex align-items-center mb-2">
+                <label class="form-label me-3 label-fixed-width">{{ type }} Leave Remaining</label>
+                <input [formControlName]="type" class="form-control flex-grow-1" type="number" min="0" />
+              </div>
+              <div *ngFor="let type of leaveTypes">
+                <div *ngIf="uploadForm.get('balances')?.get(type)?.touched && uploadForm.get('balances')?.get(type)?.invalid" class="invalid-feedback d-block ms-5">
+                  {{ type }} leave value is required and must be a number.
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center mt-2">
+              <button class="btn btn-primary primarybtn" type="submit" [disabled]="uploadForm.invalid || isSubmitting">
+                {{ isSubmitting ? 'Uploading...' : 'Upload' }}
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

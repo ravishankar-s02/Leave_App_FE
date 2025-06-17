@@ -5,7 +5,7 @@
 }
 
 app-header {
-  height: 60px;
+  height: 50px;
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -23,7 +23,7 @@ app-header {
 app-sidebar {
   width: 250px;
   flex-shrink: 0;
-  height: calc(100vh - 60px); /* Full height minus header */
+  height: calc(100vh - 50px); /* Full height minus header */
   position: sticky;
   top: 60px;
   background-color: #f4f4f4; /* Optional */
@@ -34,9 +34,6 @@ app-sidebar {
   flex: 1;
   padding: 0; /* Remove internal padding */
   overflow-y: auto;
-  height: calc(100vh - 60px); /* Allow scroll */
-  display: flex;
-  justify-content: flex-start; /* Align horizontally to left */
-  align-items: flex-start;     /* Align vertically to top */
+  height: calc(100vh - 50px); /* Allow scroll */
 }
 

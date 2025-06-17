@@ -1,11 +1,47 @@
 <header class="header">
-    <div class="left">
-      <img src="assets/ss.png" alt="Company Logo" class="logo" />
-      <span class="company-name">Simple Solve Technologies Pvt Ltd</span>
+  <div class="left">
+    <img src="assets/ss.png" alt="Company Logo" class="logo" />
+    <span class="company-name">Simple Solve Technologies Pvt Ltd</span>
+  </div>
+
+  <div class="right position-relative">
+    <button
+      class="btn btn-dark text-white namebtn d-flex align-items-center"
+      (click)="togglePopup()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16" height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-user me-1"
+      >
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      {{ username }}
+    </button>
+
+    <div *ngIf="showPopup" class="popup-menu">
+      <!-- Admin-only options -->
+      <ng-container *ngIf="role === 'Admin'">
+        <button class="dropdown-item" (click)="selectSection('leave')">
+          Leave Management
+        </button>
+        <button class="dropdown-item" (click)="selectSection('user')">
+          User Management
+        </button>
+        <div class="dropdown-divider"></div>
+      </ng-container>
+
+      <!-- Common logout -->
+      <button class="dropdown-item text-danger" (click)="logout()">
+        Logout
+      </button>
     </div>
-    <div class="right">
-      <span class="username">Hello, {{ username }}</span>
-      <button class="btn btn-primary primarybtn" (click)="logout()">Logout</button>
-    </div>
-  </header>
-  
+  </div>
+</header>

@@ -1,54 +1,45 @@
 <div class="container mt-4">
-    <form [formGroup]="jobForm" (ngSubmit)="onSubmitts()">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card shadow-sm border bcolor">
-            <div class="card-header bg-light border-bottom-0">
-              <h5 class="mb-0 text-primary fw-semibold hcolor">User Details</h5>
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="card shadow-sm border bcolor">
+          <div class="card-header bg-light border-bottom-0">
+            <h5 class="mb-0 text-primary fw-semibold hcolor">Job Details</h5>
+          </div>
+
+          <div class="card-body pt-3 tcolor">
+
+            <!-- Reusable Field Template -->
+            <div *ngFor="let field of jobFields" class="form-group d-flex align-items-center mb-2">
+              <label [for]="field.name" class="form-label me-3 label-fixed-width">{{ field.label }}</label>
+              <input
+                [type]="field.type"
+                [id]="field.name"
+                [formControlName]="field.name"
+                [readonly]="!isAdmin"
+                class="form-control flex-grow-1"
+                [class.is-invalid]="hasError(field.name)"
+              />
             </div>
-  
-            <div class="card-body pt-3 tcolor">
-              <div class="form-group row ps-0 pe-0 ms-0 me-0">
-   
-                <div class="form-group d-flex align-items-center mb-2">
-                  <label class="form-label me-3 label-fixed-width">Job Title</label>
-                  <select class="form-select" formControlName="job" [disabled]="!isAdmin">
-                    <option value="" disabled>Select Job Title</option>
-                    <option value="Front">Front End Developer</option>
-                    <option value="Back">Back End Developer</option>
-                    <option value="Full">Full Stack Developer</option>
-                    <option value="Technician">Technician</option>
-                  </select>
-                </div>
-
-                <div class="form-group d-flex align-items-center mb-2">
-                    <label class="form-label me-3 label-fixed-width">Employment Status</label>
-                    <select class="form-select" formControlName="status" [disabled]="!isAdmin">
-                      <option value="" disabled>Select Employment Status</option>
-                      <option value="text">Contract</option>
-                      <option value="text">Permanent</option>
-                      <option value="text">Temporary</option>
-                    </select>
-                </div>
-
-                <div class="form-group d-flex align-items-center mb-2">
-                    <label for="joinedDate" class="form-label me-3 label-fixed-width">Joined Date</label>
-                    <input type="date" id="joinedDate" class="form-control flex-grow-1" formControlName="joinedDate" [readonly]="!isAdmin" />
-                </div>
-  
-                <div class="form-group d-flex align-items-center mb-3">
-                  <label for="location" class="form-label me-3 label-fixed-width">Location</label>
-                  <input type="text" id="location" class="form-control flex-grow-1" formControlName="nationality" [readonly]="!isAdmin" />
+            <!-- Error Feedback -->
+            <div *ngFor="let field of jobFields">
+              <div *ngIf="hasError(field.name)" class="invalid-feedback d-block ms-5">
+                <div *ngIf="jobForm.get(field.name)?.errors?.['required']">
+                  {{ field.label }} is required.
                 </div>
               </div>
-  
-              <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
-                <button type="submit" class="btn btn-primary primarybtn">Save</button>
-              </div>
             </div>
+
+            <!-- Save Button -->
+            <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
+              <button type="submit" class="btn btn-primary primarybtn" [disabled]="jobForm.invalid">
+                Save
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
-    </form>
-  </div>
-  
+    </div>
+  </form>
+</div>

@@ -11,70 +11,61 @@ import { LeaveService } from '../../services/leave.service';
 export class ContactDetailsComponent implements OnInit {
   contactForm!: FormGroup;
   isAdmin: boolean = false;
+  employeeId!: number;
 
   constructor(private fb: FormBuilder, private service: LeaveService) {}
 
   ngOnInit(): void {
-    const role = localStorage.getItem('role');
-    this.isAdmin = role === 'Admin';
+    this.isAdmin = localStorage.getItem('role') === 'Admin';
+    const ownId = localStorage.getItem('employeeId');
+    const adminViewId = localStorage.getItem('adminViewEmployeeId');
+    this.employeeId = this.isAdmin && adminViewId ? +adminViewId : +(ownId || 0);
 
     this.contactForm = this.fb.group({
-      employeeId: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      alternateNumber: ['', [Validators.required]],
+      employeeId: [this.employeeId],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      alternateNumber: ['', [Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
-      streetAddress: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      zipCode: ['', [Validators.required]],
-      country: ['', [Validators.required]],
+      streetAddress: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipCode: ['', [Validators.required, Validators.pattern(/^\d{5,6}$/)]],
+      country: ['', Validators.required]
     });
-    
 
-    // Determine whose data to load: own or admin-view
-    let employeeId = localStorage.getItem('employeeId');
-    const adminViewId = localStorage.getItem('adminViewEmployeeId');
-    if (this.isAdmin && adminViewId) {
-      employeeId = adminViewId;
-    }
-
-    if (employeeId) {
-      this.service.getContactDetails(+employeeId).subscribe({
+    if (this.employeeId) {
+      this.service.getContactDetails(this.employeeId).subscribe({
         next: data => {
-          // Format the date to yyyy-MM-dd
-          if (data.dob) {
-            const dob = new Date(data.dob);
-            const formattedDob = dob.toISOString().split('T')[0];
-            data.dob = formattedDob;
-          }
-          this.contactForm.patchValue(data);
-
-          // Disable form for non-admin
-          if (!this.isAdmin) {
-            this.contactForm.disable(); // disable entire form
-          }
+          this.contactForm.patchValue({ ...data, employeeId: this.employeeId });
+          if (!this.isAdmin) this.contactForm.disable();
         },
-        error: err => console.error('Error loading personal details', err)
+        error: err => console.error('Error loading contact details:', err)
       });
     }
   }
 
   onSubmit(): void {
     if (this.contactForm.invalid) {
-      this.contactForm.markAllAsTouched(); // Show all validation errors
+      this.contactForm.markAllAsTouched();
       alert('Please fill all required fields correctly.');
       return;
     }
-  
-    if (this.isAdmin) {
-      this.service.saveContactDetails(this.contactForm.value).subscribe({
-        next: (response) => {
-          alert(response?.message || 'Details saved successfully');
-        },
-        error: (error) => {
-          alert(error?.error?.message || 'Failed to save details');
-        }
-      });
-    }
-  }   
+
+    const contactData = { ...this.contactForm.value, employeeId: this.employeeId };
+
+    this.service.saveContactDetails(contactData).subscribe({
+      next: (res) => alert(res?.message || 'Details saved successfully'),
+      error: (err) => alert(err?.error?.message || 'Failed to save details')
+    });
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.contactForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
+  hasError(controlName: string): boolean {
+    const control = this.contactForm.get(controlName);
+    return !!(control && control.errors && (control.touched || control.dirty));
+  }  
 }
