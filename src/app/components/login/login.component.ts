@@ -14,12 +14,12 @@ export class LoginComponent {
     password: ''
   };
 
-  isLoading: boolean = false;
-  errorMsg: string = '';
+  isLoading = false;
+  errorMsg = '';
 
   constructor(private service: LeaveService, private router: Router) {}
 
-  login() {
+  login(): void {
     this.isLoading = true;
     this.errorMsg = '';
 
@@ -27,17 +27,13 @@ export class LoginComponent {
       next: (res) => {
         this.isLoading = false;
 
-        if (res.employeeId) {
-          // ✅ STEP 4: Store login info in localStorage
+        if (res?.employeeId) {
           localStorage.setItem('token', 'valid');
           localStorage.setItem('employeeId', res.employeeId.toString());
           localStorage.setItem('firstName', res.firstName);
           localStorage.setItem('role', res.role);
-
-          // Optional: clear adminViewEmployeeId if present
           localStorage.removeItem('adminViewEmployeeId');
 
-          // ✅ Redirect to dashboard after successful login
           this.router.navigate(['/dashboard/apply-leave'], { replaceUrl: true });
         } else {
           this.errorMsg = 'Login failed: Invalid response from server.';

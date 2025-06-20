@@ -15,9 +15,11 @@ export class ViewUserComponent implements OnInit {
   selectedEmployee?: Employee;
   personalForm!: FormGroup;
   contactForm!: FormGroup;
+  salaryForm!: FormGroup;
   isAdmin = false;
   activeTab: string = 'personal';
   loadingUserDetails = false;
+  jobForm: any;
 
   constructor(private leaveService: LeaveService, private fb: FormBuilder) {}
 
@@ -52,9 +54,27 @@ export class ViewUserComponent implements OnInit {
       country: ['', Validators.required]
     });
 
+    this.salaryForm = this.fb.group({
+      employeeId: [null],
+      payGrade: ['', Validators.required],
+      currency: ['', Validators.required],
+      basicSalary: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      payFrequency: ['', Validators.required]
+    });
+
+    this.jobForm = this.fb.group({
+      employeeId: [null],
+      jobTitle: ['', Validators.required],
+      employmentStatus: ['', Validators.required],
+      joinedDate: ['', Validators.required],
+      location: ['', Validators.required]
+    });
+
     if (!this.isAdmin) {
       this.personalForm.disable();
       this.contactForm.disable();
+      this.salaryForm.disable();
+      this.jobForm.disable();
     }
   }
 
@@ -75,6 +95,8 @@ export class ViewUserComponent implements OnInit {
     this.selectedEmployee = this.employees.find(e => e.employeeId === employeeId);
     this.personalForm.reset({ employeeId });
     this.contactForm.reset({ employeeId });
+    this.salaryForm.reset({ employeeId });
+    this.jobForm.reset({ employeeId });
     this.loadUserDetails(employeeId);
   }
 
@@ -99,6 +121,32 @@ export class ViewUserComponent implements OnInit {
         this.contactForm.reset({ employeeId });
       },
       complete: () => this.loadingUserDetails = false
+    });
+
+    this.leaveService.getSalary(employeeId).subscribe({
+      next: (data) => this.salaryForm.patchValue({ ...data, employeeId }),
+      error: (err) => {
+        console.error('Error loading salary details', err);
+        this.salaryForm.reset({ employeeId });
+      },
+      complete: () => this.loadingUserDetails = false
+    });
+
+    this.leaveService.getJob(employeeId).subscribe({
+      next: (data: any) => {
+        const formattedDate = data.joinedDate
+          ? this.formatDateToLocalYYYYMMDD(data.joinedDate)
+          : '';
+
+        this.jobForm.patchValue({
+          ...data,
+          joinedDate: formattedDate,
+          employeeId: employeeId
+        });
+      },
+      error: (err) => {
+        console.error('Error loading job details:', err);
+      }
     });
   }
 
@@ -125,6 +173,44 @@ export class ViewUserComponent implements OnInit {
     this.leaveService.saveContactDetails(this.contactForm.value).subscribe({
       next: (res) => alert(res?.message || 'Contact details saved successfully'),
       error: (err) => alert(err?.error?.message || 'Failed to save contact details')
+    });
+  }
+
+  onSubmitSalary(): void {
+    if (this.salaryForm.invalid) {
+      this.salaryForm.markAllAsTouched();
+      alert('Please fill all required salary details correctly.');
+      return;
+    }
+
+    const dataToSave = {
+      ...this.salaryForm.getRawValue(),
+      employeeId: this.selectedEmployeeId
+    };
+
+    this.leaveService.saveSalary(dataToSave).subscribe({
+      next: () => alert('Salary details saved successfully'),
+      error: () => alert('Failed to save salary details')
+    });
+  }
+
+  onSubmit(): void {
+    if (!this.isAdmin) return;
+
+    if (this.jobForm.invalid) {
+      this.jobForm.markAllAsTouched();
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    const jobData = {
+      ...this.jobForm.getRawValue(),
+      employeeId: this.selectedEmployeeId
+    };
+
+    this.leaveService.saveJob(jobData).subscribe({
+      next: (res) => alert(res?.message || 'Details saved successfully'),
+      error: (err) => alert(err?.error?.message || 'Failed to save job details')
     });
   }
 

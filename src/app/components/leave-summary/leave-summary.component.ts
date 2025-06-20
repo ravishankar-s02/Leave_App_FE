@@ -18,21 +18,36 @@ export class LeaveSummaryComponent implements OnInit {
   leaveSummary: LeaveSummary[] = [];
   currentYear: number = new Date().getFullYear();
   hasError: boolean = false;
+  employeeId: number = 0;
 
   constructor(private leaveService: LeaveService) {}
 
   ngOnInit(): void {
-    const employeeId = Number(localStorage.getItem('employeeId'));
-    if (!employeeId) {
+    this.setUserContext();
+    this.loadLeaveSummary();
+  }
+
+  private setUserContext(): void {
+    const role = localStorage.getItem('role');
+    const ownId = localStorage.getItem('employeeId');
+    const adminViewId = localStorage.getItem('adminViewEmployeeId');
+
+    this.employeeId = role === 'Admin' && adminViewId
+      ? +adminViewId
+      : +(ownId ?? 0);
+  }
+
+  private loadLeaveSummary(): void {
+    if (!this.employeeId) {
       this.hasError = true;
       console.error('Invalid or missing employeeId');
       return;
     }
 
-    this.leaveService.getLeaveSummary(employeeId).subscribe({
+    this.leaveService.getLeaveSummary(this.employeeId).subscribe({
       next: (data) => this.leaveSummary = data || [],
       error: (err) => {
-        console.error(err);
+        console.error('Error fetching leave summary:', err);
         this.hasError = true;
       }
     });

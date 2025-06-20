@@ -15,8 +15,8 @@
               </tr>
             </thead>
             <tbody class="link">
-              <tr *ngFor="let emp of employees" (click)="selectUser(emp.employeeId)" 
-                   [class.table-active]="emp.employeeId === selectedEmployeeId">
+              <tr *ngFor="let emp of employees" (click)="selectUser(emp.employeeId)"
+                [class.table-active]="emp.employeeId === selectedEmployeeId">
                 <td>{{ emp.employeeId }}</td>
                 <td>{{ emp.firstName }} {{ emp.lastName }}</td>
               </tr>
@@ -32,12 +32,20 @@
         <div class="card-header bg-light border-bottom-0">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-              <a class="nav-link" [class.active]="activeTab === 'personal'" 
-                 (click)="setActiveTab('personal')">Personal Details</a>
+              <a class="nav-link" [class.active]="activeTab === 'personal'" (click)="setActiveTab('personal')">Personal
+                Details</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [class.active]="activeTab === 'contact'" 
-                 (click)="setActiveTab('contact')">Contact Details</a>
+              <a class="nav-link" [class.active]="activeTab === 'contact'" (click)="setActiveTab('contact')">Contact
+                Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'job'" 
+                 (click)="setActiveTab('job')">Job Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'salary'" (click)="setActiveTab('salary')">Salary
+                Details</a>
             </li>
           </ul>
         </div>
@@ -51,7 +59,7 @@
                 <!-- Name -->
                 <div class="form-group d-flex align-items-center mb-3 w-100">
                   <label class="form-label me-5 label-fixed-width">FN/MN/LN</label>
-                  <input class="form-control me-2" formControlName="firstName" placeholder="First" required />
+                  <input class="form-control me-2 space" formControlName="firstName" placeholder="First" required />
                   <input class="form-control me-2" formControlName="middleName" placeholder="Mi" />
                   <input class="form-control" formControlName="lastName" placeholder="Last" required />
                 </div>
@@ -93,7 +101,8 @@
                 <!-- Nationality -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="nationality" class="form-label me-4 label-fixed-width">Nationality</label>
-                  <input type="text" id="nationality" class="form-control" formControlName="nationality" [readonly]="!isAdmin" />
+                  <input type="text" id="nationality" class="form-control" formControlName="nationality"
+                    [readonly]="!isAdmin" />
                 </div>
               </div>
 
@@ -110,25 +119,29 @@
                 <!-- Phone Number -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="phoneNumber" class="form-label me-3 label-fixed-width">Phone Number</label>
-                  <input type="tel" id="phoneNumber" class="form-control" formControlName="phoneNumber" [readonly]="!isAdmin" />
+                  <input type="tel" id="phoneNumber" class="form-control" formControlName="phoneNumber"
+                    [readonly]="!isAdmin" />
                 </div>
 
                 <!-- Alternate Number -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="alternateNumber" class="form-label me-3 label-fixed-width">Alternate Number</label>
-                  <input type="tel" id="alternateNumber" class="form-control" formControlName="alternateNumber" [readonly]="!isAdmin" />
+                  <input type="tel" id="alternateNumber" class="form-control" formControlName="alternateNumber"
+                    [readonly]="!isAdmin" />
                 </div>
 
                 <!-- Email -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="contactEmail" class="form-label me-3 label-fixed-width">Email</label>
-                  <input type="email" id="contactEmail" class="form-control" formControlName="email" [readonly]="!isAdmin" />
+                  <input type="email" id="contactEmail" class="form-control" formControlName="email"
+                    [readonly]="!isAdmin" />
                 </div>
 
                 <!-- Street Address -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="streetAddress" class="form-label me-3 label-fixed-width">Street Address</label>
-                  <input type="text" id="streetAddress" class="form-control" formControlName="streetAddress" [readonly]="!isAdmin" />
+                  <input type="text" id="streetAddress" class="form-control" formControlName="streetAddress"
+                    [readonly]="!isAdmin" />
                 </div>
 
                 <!-- City -->
@@ -146,13 +159,15 @@
                 <!-- Zip/Postal Code -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="zipCode" class="form-label me-3 label-fixed-width">Zip/Postal Code</label>
-                  <input type="text" id="zipCode" class="form-control" formControlName="zipCode" [readonly]="!isAdmin" />
+                  <input type="text" id="zipCode" class="form-control" formControlName="zipCode"
+                    [readonly]="!isAdmin" />
                 </div>
 
                 <!-- Country -->
                 <div class="form-group d-flex align-items-center mb-3">
                   <label for="country" class="form-label me-3 label-fixed-width">Country</label>
-                  <input type="text" id="country" class="form-control" formControlName="country" [readonly]="!isAdmin" />
+                  <input type="text" id="country" class="form-control" formControlName="country"
+                    [readonly]="!isAdmin" />
                 </div>
               </div>
 
@@ -161,8 +176,99 @@
               </div>
             </form>
           </div>
+
+          <!-- Job Details Tab -->
+          <div *ngIf="activeTab === 'job'">
+            <form [formGroup]="jobForm" (ngSubmit)="onSubmit()" novalidate>
+              <div class="form-group row m-0">
+                <!-- Job Title -->
+                <div class="form-group d-flex align-items-center mb-3">
+                  <label for="jobTitle" class="form-label me-3 label-fixed-width">Job Title</label>
+                  <input type="text" id="jobTitle" formControlName="jobTitle" class="form-control flex-grow-1"
+                    [readonly]="!isAdmin" />
+                </div>
+
+                <!-- Employment Status -->
+                <div class="form-group d-flex align-items-center mb-3">
+                  <label for="employmentStatus" class="form-label me-3 label-fixed-width">Employment Status</label>
+                  <input type="text" id="employmentStatus" formControlName="employmentStatus"
+                    class="form-control flex-grow-1" [readonly]="!isAdmin" />
+                </div>
+
+                <!-- Joined Date -->
+                <div class="form-group d-flex align-items-center mb-3">
+                  <label for="joinedDate" class="form-label me-3 label-fixed-width">Joined Date</label>
+                  <input type="date" id="joinedDate" formControlName="joinedDate" class="form-control flex-grow-1"
+                    [readonly]="!isAdmin" />
+                </div>
+
+                <!-- Location -->
+                <div class="form-group d-flex align-items-center mb-3">
+                  <label for="location" class="form-label me-3 label-fixed-width">Location</label>
+                  <input type="text" id="location" formControlName="location" class="form-control flex-grow-1"
+                    [readonly]="!isAdmin" />
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
+                <button type="submit" class="btn btn-primary primarybtn" [disabled]="jobForm.invalid">
+                  Save
+                </button>
+              </div>
+          </form>
         </div>
+
+        <!-- Salary Details Tab -->
+        <div *ngIf="activeTab === 'salary'">
+          <form [formGroup]="salaryForm" (ngSubmit)="onSubmitSalary()">
+            <div class="form-group row m-0">
+              <!-- Pay Grade -->
+              <div class="form-group d-flex align-items-center mb-3">
+                <label for="payGrade" class="form-label me-3 label-fixed-width">Pay Grade</label>
+                <input type="text" id="payGrade" class="form-control flex-grow-1" formControlName="payGrade"
+                  [readonly]="!isAdmin" />
+              </div>
+
+              <!-- Currency -->
+              <div class="form-group d-flex align-items-center mb-2">
+                <label class="form-label me-3 label-fixed-width">Currency</label>
+                <select class="form-select" formControlName="currency" [disabled]="!isAdmin">
+                  <option value="" disabled>Select Currency</option>
+                  <option value="Rupee">Rupee</option>
+                  <option value="Dollar">Dollar</option>
+                </select>
+              </div>
+
+              <!-- Basic Salary -->
+              <div class="form-group d-flex align-items-center mb-3">
+                <label for="basicSalary" class="form-label me-3 label-fixed-width">Basic Salary</label>
+                <input type="text" id="basicSalary" class="form-control flex-grow-1" formControlName="basicSalary"
+                  [readonly]="!isAdmin" />
+              </div>
+
+              <!-- Pay Frequency -->
+              <div class="form-group d-flex align-items-center mb-2">
+                <label class="form-label me-3 label-fixed-width">Pay Frequency</label>
+                <select class="form-select" formControlName="payFrequency" [disabled]="!isAdmin">
+                  <option value="" disabled>Select Pay Frequency</option>
+                  <option value="Daily">Daily</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Yearly">Yearly</option>
+                </select>
+              </div>
+
+              <!-- Submit -->
+              <div class="d-flex justify-content-center mt-2" *ngIf="isAdmin">
+                <button type="submit" class="btn btn-primary primarybtn">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
 </div>

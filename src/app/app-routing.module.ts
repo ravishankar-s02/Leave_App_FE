@@ -17,13 +17,25 @@ import { WorkExperienceComponent } from './components/work-experience/work-exper
 import { EducationComponent } from './components/education/education.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
     component: LoginComponent,
-    canActivate: [AuthGuard] // ✅ Block if already logged in
+    canActivate: [AuthGuard],
+
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
   },
   {
     path: 'dashboard',

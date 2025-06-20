@@ -13,22 +13,11 @@ export class JobComponent implements OnInit {
   isAdmin: boolean = false;
   employeeId: number = 0;
 
-  // Fields for reuse in template
-  jobFields = [
-    { name: 'jobTitle', label: 'Job Title', type: 'text' },
-    { name: 'employmentStatus', label: 'Employment Status', type: 'text' },
-    { name: 'joinedDate', label: 'Joined Date', type: 'date' },
-    { name: 'location', label: 'Location', type: 'text' }
-  ];
-
-  constructor(
-    private fb: FormBuilder,
-    private service: LeaveService
-  ) {}
+  constructor(private fb: FormBuilder, private service: LeaveService) {}
 
   ngOnInit(): void {
     this.setUserContext();
-    this.createForm();
+    this.initForm();
     this.loadJobDetails();
   }
 
@@ -41,7 +30,7 @@ export class JobComponent implements OnInit {
     this.employeeId = this.isAdmin && adminViewId ? +adminViewId : +(ownId ?? 0);
   }
 
-  private createForm(): void {
+  private initForm(): void {
     this.jobForm = this.fb.group({
       employeeId: [this.employeeId],
       jobTitle: ['', Validators.required],
@@ -51,7 +40,7 @@ export class JobComponent implements OnInit {
     });
 
     if (!this.isAdmin) {
-      this.jobForm.disable();
+      this.jobForm.disable(); // Read-only for non-admin
     }
   }
 
@@ -83,19 +72,14 @@ export class JobComponent implements OnInit {
     return date.toISOString().substring(0, 10);
   }
 
-  hasError(controlName: string): boolean {
-    const control = this.jobForm.get(controlName);
-    return !!control?.errors && (control.touched || control.dirty);
-  }
-
   onSubmit(): void {
+    if (!this.isAdmin) return;
+
     if (this.jobForm.invalid) {
       this.jobForm.markAllAsTouched();
       alert('Please fill in all required fields.');
       return;
     }
-
-    if (!this.isAdmin) return;
 
     const jobData = {
       ...this.jobForm.getRawValue(),
@@ -103,12 +87,13 @@ export class JobComponent implements OnInit {
     };
 
     this.service.saveJob(jobData).subscribe({
-      next: (response) => {
-        alert(response?.message || 'Details saved successfully.');
-      },
-      error: (error) => {
-        alert(error?.error?.message || 'Failed to save job details.');
-      }
+      next: (res) => alert(res?.message || 'Details saved successfully'),
+      error: (err) => alert(err?.error?.message || 'Failed to save job details')
     });
+  }
+
+  hasError(controlName: string): boolean {
+    const control = this.jobForm.get(controlName);
+    return !!control?.errors && (control.touched || control.dirty);
   }
 }

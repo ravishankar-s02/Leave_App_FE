@@ -42,3 +42,7 @@
   .table-active {
     background-color: #e9ecef !important;
   }
+
+  .space{
+    margin-left: 16px !important;
+  }

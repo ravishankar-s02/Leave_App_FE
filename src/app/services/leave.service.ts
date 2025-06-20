@@ -104,4 +104,17 @@ export class LeaveService {
   uploadLeaveBalance(data: any): Observable<any> {
     return this.http.post(`${this.api}/leave-summary/upload-balance`, data);
   }
+
+  // ✅ Use correct protocol and port
+sendResetLink(email: string) {
+  return this.http.post<any>('http://localhost:5140/api/Employee/forgot-password', { email });
+}
+
+resetPassword(token: string, newPassword: string) {
+  return this.http.post<any>('http://localhost:5140/api/Employee/reset-password', {
+    token,
+    newPassword
+  });
+}
+  
 }

@@ -28,6 +28,8 @@ import { ModuleRegistry } from 'ag-grid-community';
 import { ClientSideRowModelModule } from 'ag-grid-community';
 import { LeaveSummaryComponent } from './components/leave-summary/leave-summary.component';
 import { UploadLeaveComponent } from './components/upload-leave/upload-leave.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 // Register the required module(s)
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -51,7 +53,9 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     EducationComponent,
     ViewUserComponent,
     LeaveSummaryComponent,
-    UploadLeaveComponent
+    UploadLeaveComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
